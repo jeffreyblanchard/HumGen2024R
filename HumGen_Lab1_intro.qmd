@@ -1,0 +1,209 @@
+---
+title: 'Lab 1 : Introduction to R and Reproducible Research'
+---
+
+## Learning objectives
+
+-   What is reproducible research?
+-   Why become a data Scientist
+-   Overview of the R statistical programming language
+-   The RStudio Integrated Development Environment
+-   The Quarto scientific publishing system
+-   Working in R coding chunks in Quarto
+-   Reading error messages
+
+## Overview
+
+In recent years, the field of genomic analysis has sifted towards requiring some knowledge of R, Python/Perl/C and the use of high performance computers (often requiring some fundamental Unix skills) available at national computing centers for working with large data sets. While there are many great software packages available for particular computational problems in evolutionary biology, many software programs do not have a user interface (e.g. drop down menus and such) and are run in command line mode. The lab sessions in this course have been designed to give students an introduction to working with R and packages used for Human Genome Analysis.
+
+The lab course is divided into 3 parts
+
+1.  Introduction to R and the tidyverse
+2.  Gene Expression Analysis
+3.  Analysis of SNPs and your genetic data
+
+## Reproducible Research
+
+Reproducibility is the hallmark of science, which is based on empirical observations coupled with explanatory models. While reproducibility encompasses the full science lifecycle, and includes issues such as methodological consistency and treatment of bias, in this course we will focus on computational reproducibility: the ability to document data, analyses, and models sufficiently for other researchers to be able to understand and ideally re-execute the computations that lead to scientific results and conclusions. With current publishing practices, this can be difficult because data are typically unavailable, the method sections of papers do not detail the computational approaches used, and analyses and models are often conducted in graphical programs, or, when scripted analyses are employed, the code is not available. In this course we will learn how to write code that is integrated into reproducible reports.
+
+## Data Science
+
+Here a few links that I will go over in lab:
+
+-   <a href="https://datascience.berkeley.edu/about/what-is-data-science/"target="_blank">What is Data Science? </a>\
+-   <a href="https://blog.udacity.com/2014/11/data-science-job-skills.html"target="_blank">What is Data Science? 8 Skills That Will Get You Hired</a>\
+-   <a href="https://www.nceas.ucsb.edu/news/open-science-kinder-science"target="_blank">Open Science is Kinder Science</a>\
+-   <a href="https://datacarpentry.org/"target="_blank">Data Carpentry</a>\
+-   <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2005561"target="_blank">Building a local community of practice in scientific programming for life scientists</a>
+
+## R
+
+R is the largest and most comprehensive public domain statistical computing environment. The core R package is enhanced by several hundred user-supplied add-on packages, including many for gene expression analysis, in the <a href="http://cran.r-project.org/"> Comprehensive R Archive Network (CRAN)</a>. Omegahat Project for Statistical Computing</a>. <a href="http://www.bioconductor.org/"> BioConductor</a> is an open source and open development software project for the analysis and comprehension of genomic data and is based primarily on the R programming language. R and Bioconductor are free, Open Source and available for Windows, MacOS and a wide variety of UNIX platforms.
+
+### R manuals, help and tutorials
+
+Many introductory and advance tutorials have been developed for R. Here are a few
+
+-   <a href="http://cran.r-project.org/manuals.html#R-admin" target="_blank">The offical R manuals</a>
+-   <a href="http://cran.r-project.org/doc/manuals/R-intro.html" target="_blank">CRAN's Introduction to R</a>
+-   <a href="https://r4ds.had.co.nz/" target="_blank">R for Data Science</a> by Garrett Grolemund and Hadley Wickham
+-   <a href="http://www.cookbook-r.com/Graphs/" target="_blank">R Graphics Cookbook</a> by Winston Chang
+-   <a href="https://github.com/datacarpentry/genomics-workshop/" target="_blank">Data Carpentries Genomic Workshop Sessions</a>
+-   <a href="https://datacarpentry.org/R-ecology-lesson/index.html" target="_blank">Data Analysis and Visualization in R for Ecologists</a>
+
+There are also many workshops and online R courses that you could take to follow up what you learn in this class.
+
+## On the Computer
+
+### Getting set up
+
+#### Bio478 and Bio678
+
+[Posit Cloud](https://posit.cloud/) and create an account. I will share the link for our Workspace in an Announcement on Canvas. The steps are
+
+-   Click on Link in Canvas
+-   Join HumGen Workspace
+-   Under your spaces select HumGen Workspace
+-   Click on Project tab
+-   Start assignment
+
+#### Bio678
+
+If you are a graduate student in 678 please set up an account (you will need your PIs approval) on Unity <https://unity.rc.umass.edu/> the UMass High Performance Computing cluster. You will be using R and RStudio from the Unity HPC. You are also welcome to use R and RStudio from your own computer.
+
+Unity staff maintain a Slack channel for help to solves bioinformatics-related issues. To join the Unity Slack community, please sign up with your UMass email [here](https://unity-user-community.slack.com/join/signup#/domain-signup). If you’re unable to register with your school email, please contact hpc\@umass.edu with your preferred email address and they’ll send you a direct invite.
+
+### The RStudio Integrated Devopement Environment (IDE)
+
+The most popular way to write R programs and to interactively run code and create graphs is using the <a href="https://posit.co/products/open-source/rstudio/" target="_blank">RStudio Integrated Devopement Environment (IDE)</a>. It is open source software that is available for free. There are other ways to write and run R code, such as using text editors, VS Code editors, Neovim or Jupyter Notebooks, but we will focus on RStudio in this class.
+
+#### Working in RStudio
+
+The default R studio appearance includes 4 windows.
+
+1.  The R script(s) and data view (upper left window).
+2.  Console (bottom left window).
+3.  Workspace and history (upper right window).
+4.  Files, plots, packages and help (botton right window).
+
+![RStudio Screenshot](images/lab1/RStudio_interface.png)
+
+#### The R script(s) and data view window (upper left window)
+
+In this window you can type directly into a file, run code and save the file for reuse. In this class we will work with Quarto files (discussed below).
+
+#### Console Window (bottom left window)
+
+The console is where you can type R commands and see output.
+
+Type
+
+3 + 3
+
+#### Workspace and History tabs (upper right window)
+
+The workspace tab shows all the active objects. The history tab shows a list of commands used so far.
+
+#### Files, Plots, Packages and Help (bottom right window)
+
+There are data sets that come with the R package and used in tutorials. If you run the following command you will see a graph of related to the cars data set in the Plots window
+
+### Quarto
+
+The [Quarto](https://quarto.org) is a scientific publishing system. In this class we will use one of it's simplest features, producing a report with the code and resulting output (graphs, tables, statistical analysis). Quarto can also be used to produce slides, web sites, scientific manuscripts and books. For example, and all the labs for this course and my [research laboratory website](https://jeffreyblanchard.github.io/lab/) were made using Quarto. Quarto wraps together many previous packages used for publishing with R.
+
+To use Quarto with R, the [rmarkdown R package](https://rmarkdown.rstudio.com/) is installed. There are some differences between a Quarto and R Markdown document, but overall they are very similar.
+
+#### The Quarto template file
+
+In RStudio select File \> New File \> Quarto Document. Add a title and your name then create the document. Notice the your document says untitled with an asterisk. Save your document (e.g. template). This will automatically add the .qmd extension to your file (template.qmd). ALWAYS SAVE YOUR DOCUMENT BEFORE YOU START WORKING.
+
+![Quarto template visual editor](images/lab1/quarto_template_visual.png)
+
+Click on the `Render` icon. This will run the code, show the output and create a html file that is automatically saved to your directory (look for the template.html file) and will automatically open this file in your browser. Now let's go back to the template.qmd file. The top section of the document delineated by the `---` is called the YAML block. In this template it contains your the title, your name, the output type (html) and the editor preference (visual).You can also work with your file directly with the source code by clicking the `source` icon. Which is often quicker once you've learned rmarkown.
+
+![Quarto template source editor](images/lab1/quarto_template_source.png) We use the YAML block more fully below when we create the lab report.
+
+The text with the white background is in rmarkdown. The icons in the same section as the `visual` icon you can easily made the text in bold or in italics, change the text from normal to a header, create bulleted or numbered lists, insert html links, add images, insert tables and more.
+
+The text with the gray background is in R code chunks. Click on the `green play` icon in the top right corner of the code chunk to run the code.
+
+Create new code chunk by clicking on the `green +C` icon to the right of the `Render` icon. In the code chunk type `plot(cars)`. Then click the run the code to see a graph of the cars data set that comes preloaded into R.
+
+```{r}
+plot(cars)
+```
+
+## Producing Lab Reports with Quarto
+
+The following lines of code in your YAML block with generate a table of contents (toc) as shown at the top of this lab. The line with `embed-resources` creates a stand alone html file. If this line is not present in addition to the template.html file a folder called template_files will be created. In this case your template.html will not have the proper format when you turn it in.
+
+```         
+---
+title: "Lab 1"
+author: "Jeff Blanchard"
+format:
+  html:
+    toc: true
+    toc_float: true
+    embed-resources: true
+editor: visual
+---
+```
+
+Your lab report must each exercises labeled with a header so that each one appears in the table of contents.
+
+If you are working on Posit Cloud or the Unity You will need to first export (download) the Lab1_yourname.html file to your computer, then upload the file to Canvas. In the bottom right corner click on the `wheel` icon then select Export.
+
+![](images/lab1/Export_lab.png){alt="Exporting html file"}
+
+### Writing R code
+
+#### Assignment statements
+
+All R statements where you create objects are called assignment statements and the form "object_name \<- value"
+
+```{r}
+x <- 3
+```
+
+Simply typing x will give the value of x
+
+```{r}
+x
+```
+
+You will make lots of assignments and \<- is a pain to type. Instead, use RStudio's keyboard shortcut: Alt + - (the minus sign). Notice that RStudio automagically surrounds \<- with spaces, which is a good code formatting practice. An equals sign = will work in place of \<-, but it will cause confusion later so keep to the convention of using \<- to make assignments
+
+#### Object Names
+
+Object names must start with a letter, and can only contain letters, numbers, underscores and periods. You want your object names to be descriptive, so you'll need a convention for multiple words. I recommend snake_case where you separate lowercase words with an underscore. Note that R is case sensitive, e.g., object names gene, GENE, Gene are all different.
+
+```{r}
+genome_size <- 3100000000
+```
+
+**Important note:** since there are many built-in functions in R, make sure that the new object names you assign are not already used by the system. A simple way of checking this is to type in the name you want to use. If the system returns an error message telling you that such object is not found, it is safe to use the name. 
+
+#### Characters
+
+A character object is used to represent string values in R. It is defined by double quotes "".
+
+```{r}
+DNA <- "ATGAAA"
+DNA
+```
+
+#### Some examples and checking your `Environment` in the top right menu
+
+```{r}
+x <- 2 
+```
+
+## Exercises
+
+
+
+
+
+

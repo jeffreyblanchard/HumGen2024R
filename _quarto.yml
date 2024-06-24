@@ -1,0 +1,10 @@
+project:
+  output-dir: docs
+  
+format:
+  html:
+    toc: true
+    toc_float: true
+    code-fold: show
+    code-summary: "R code"
+    embed-resources: true
