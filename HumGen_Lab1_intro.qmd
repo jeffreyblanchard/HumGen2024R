@@ -5,12 +5,12 @@ title: 'Lab 1 : Introduction to R and Reproducible Research'
 ## Learning objectives
 
 -   What is reproducible research?
--   Why become a data Scientist
+-   Why become a data scientist?
 -   Overview of the R statistical programming language
 -   The RStudio Integrated Development Environment
 -   The Quarto scientific publishing system
 -   Working in R coding chunks in Quarto
--   Reading error messages
+-   Interpreting error messages
 
 ## Overview
 
@@ -71,7 +71,7 @@ There are also many workshops and online R courses that you could take to follow
 
 If you are a graduate student in 678 please set up an account (you will need your PIs approval) on Unity <https://unity.rc.umass.edu/> the UMass High Performance Computing cluster. You will be using R and RStudio from the Unity HPC. You are also welcome to use R and RStudio from your own computer.
 
-Unity staff maintain a Slack channel for help to solves bioinformatics-related issues. To join the Unity Slack community, please sign up with your UMass email [here](https://unity-user-community.slack.com/join/signup#/domain-signup). If you’re unable to register with your school email, please contact hpc\@umass.edu with your preferred email address and they’ll send you a direct invite.
+Unity staff maintain a Slack channel for help to solves bioinformatics-related issues. To join the Unity Slack community, please sign up with your UMass email [here](https://unity-user-community.slack.com/join/signup#/domain-signup). If you're unable to register with your school email, please contact hpc\@umass.edu with your preferred email address and they'll send you a direct invite.
 
 ### The RStudio Integrated Devopement Environment (IDE)
 
@@ -100,9 +100,11 @@ Type
 
 3 + 3
 
-#### Workspace and History tabs (upper right window)
+To better document and save your code write it in the Quarto documents rather than the console. On occasion we will use the console to access documentation and for other purposes.
 
-The workspace tab shows all the active objects. The history tab shows a list of commands used so far.
+#### Environment and History tabs (upper right window)
+
+The `Environment` tab shows all the active objects. If you have a data frame loaded, then click on the object will enable you to view the table. The `History` tab shows a list of commands used so far.
 
 #### Files, Plots, Packages and Help (bottom right window)
 
@@ -183,7 +185,7 @@ Object names must start with a letter, and can only contain letters, numbers, un
 genome_size <- 3100000000
 ```
 
-**Important note:** since there are many built-in functions in R, make sure that the new object names you assign are not already used by the system. A simple way of checking this is to type in the name you want to use. If the system returns an error message telling you that such object is not found, it is safe to use the name. 
+**Important note:** since there are many built-in functions in R, make sure that the new object names you assign are not already used by the system. A simple way of checking this is to type in the name you want to use. If the system returns an error message telling you that such object is not found, it is safe to use the name.
 
 #### Characters
 
@@ -201,9 +203,3 @@ x <- 2
 ```
 
 ## Exercises
-
-
-
-
-
-
