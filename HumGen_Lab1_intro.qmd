@@ -5,12 +5,12 @@ title: 'Lab 1 : Introduction to R and Reproducible Research'
 ## Learning objectives
 
 -   What is reproducible research?
--   Why become a data scientist?
+-   Why become a data Scientist
 -   Overview of the R statistical programming language
 -   The RStudio Integrated Development Environment
 -   The Quarto scientific publishing system
 -   Working in R coding chunks in Quarto
--   Interpreting error messages
+-   Reading error messages
 
 ## Overview
 
@@ -71,7 +71,7 @@ There are also many workshops and online R courses that you could take to follow
 
 If you are a graduate student in 678 please set up an account (you will need your PIs approval) on Unity <https://unity.rc.umass.edu/> the UMass High Performance Computing cluster. You will be using R and RStudio from the Unity HPC. You are also welcome to use R and RStudio from your own computer.
 
-Unity staff maintain a Slack channel for help to solves bioinformatics-related issues. To join the Unity Slack community, please sign up with your UMass email [here](https://unity-user-community.slack.com/join/signup#/domain-signup). If you're unable to register with your school email, please contact hpc\@umass.edu with your preferred email address and they'll send you a direct invite.
+Unity staff maintain a Slack channel for help to solves bioinformatics-related issues. To join the Unity Slack community, please sign up with your UMass email [here](https://unity-user-community.slack.com/join/signup#/domain-signup). If you’re unable to register with your school email, please contact hpc\@umass.edu with your preferred email address and they’ll send you a direct invite.
 
 ### The RStudio Integrated Devopement Environment (IDE)
 
@@ -118,7 +118,7 @@ To use Quarto with R, the [rmarkdown R package](https://rmarkdown.rstudio.com/) 
 
 #### The Quarto template file
 
-In RStudio select File \> New File \> Quarto Document. Add a title and your name then create the document. Notice the your document says untitled with an asterisk. Save your document (e.g. template). This will automatically add the .qmd extension to your file (template.qmd). ALWAYS SAVE YOUR DOCUMENT BEFORE YOU START WORKING.
+In RStudio select File \> New File \> Quarto Document. Add a title and your name then create the document. Notice the your file says untitled with an asterisk. Save your file (e.g. lab1). This will automatically add the .qmd extension to your file (lab1.qmd). ALWAYS SAVE YOUR FILE BEFORE YOU START WORKING AND OFTEN WHILE WORKING.
 
 ![Quarto template visual editor](images/lab1/quarto_template_visual.png)
 
@@ -185,7 +185,7 @@ Object names must start with a letter, and can only contain letters, numbers, un
 genome_size <- 3100000000
 ```
 
-**Important note:** since there are many built-in functions in R, make sure that the new object names you assign are not already used by the system. A simple way of checking this is to type in the name you want to use. If the system returns an error message telling you that such object is not found, it is safe to use the name.
+**Important note:** since there are many built-in functions in R, make sure that the new object names you assign are not already used by the system. A simple way of checking this is to type in the name you want to use. If the system returns an error message telling you that such object is not found, it is safe to use the name. 
 
 #### Characters
 
@@ -203,3 +203,9 @@ x <- 2
 ```
 
 ## Exercises
+
+
+
+
+
+

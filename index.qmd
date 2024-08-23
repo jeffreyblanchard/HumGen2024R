@@ -4,18 +4,23 @@ title: "Human Genome Analysis Spring 2024"
 
 This is a rendering of hmtl files from the [course repository](https://github.com/jeffreyblanchard/HumGen2024R) for Human Genome Analysis taught at the University of Massachusetts Amherst by Prof. Jeffrey Blanchard.  If you are not using RStudio (Posit) Cloud here are [directions](HumGen_github.html) for creating a RStudio project space that will sync with and download files from the course repo.
 
-Introduction to R and Tidyveres
+Introduction to R and Tidyverse
+
 * Lab 1 : [Introduction to R and Reproducible Research](HumGen_Lab1_intro.html)
-* Lab 2 : 
-* Lab 3 : 
-* Lab 4 : 
-* Lab 5 : 
+* Lab 2 : [Data Visualization with ggplot](HumGen_Lab2_ggplot.html)
+* Lab 3 : Data Transformation with dplyr
+* Lab 4 : Data Transformation and Visualization with Covid data
+* Lab 5 : Communication
+
 Gene Expression Analysis
-* Lab 6 : 
-* Lab 7 : 
-* Lab 8 : 
+
+* Lab 6 : Normalization and Data Exploration
+* Lab 7 : Statistics
+* Lab 8 : Gene Ontology and Pathway Analysis
+
 SNPs and GWAS
-* Lab 9 : 
-* Lab 10 : 
-* Lab 11 : 
-* Lab 12 :
+
+* Lab 9 : Ancestry
+* Lab 10 : Linking Your SNPs to published genome-wide association studies (GWASCAT) - I
+* Lab 11 : Linking Your SNPs to published genome-wide association studies (GWASCAT) - II
+* Lab 12 : Visualization of GWASCAT mappings
