@@ -21,6 +21,6 @@ Gene Expression Analysis
 SNPs and GWAS
 
 * Lab 9 : Ancestry
-* Lab 10 : Linking Your SNPs to published genome-wide association studies (GWASCAT) - I
-* Lab 11 : Linking Your SNPs to published genome-wide association studies (GWASCAT) - II
-* Lab 12 : Visualization of GWASCAT mappings
+* Lab 10 : Linking Your SNPs to published genome-wide association studies (GWASCAT)
+* Lab 11 : Data Transformation and Visualization with GWASCAT mappings I
+* Lab 12 : Data Transformation and Visualization with GWASCAT mappings II
