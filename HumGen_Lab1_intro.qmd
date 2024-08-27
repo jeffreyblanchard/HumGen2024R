@@ -40,6 +40,10 @@ Here a few links that I will go over in lab:
 
 R is the largest and most comprehensive public domain statistical computing environment. The core R package is enhanced by several hundred user-supplied add-on packages, including many for gene expression analysis, in the <a href="http://cran.r-project.org/"> Comprehensive R Archive Network (CRAN)</a>. Omegahat Project for Statistical Computing</a>. <a href="http://www.bioconductor.org/"> BioConductor</a> is an open source and open development software project for the analysis and comprehension of genomic data and is based primarily on the R programming language. R and Bioconductor are free, Open Source and available for Windows, MacOS and a wide variety of UNIX platforms.
 
+### The RStudio Integrated Devopement Environment (IDE)
+
+The most popular way to write R programs and to interactively run code and create graphs is using the <a href="https://posit.co/products/open-source/rstudio/" target="_blank">RStudio Integrated Devopement Environment (IDE)</a>. It is open source software that is available for free. There are other ways to write and run R code, such as using text editors, VS Code editors, Neovim or Jupyter Notebooks, but we will focus on RStudio in this class.
+
 ### R manuals, help and tutorials
 
 Many introductory and advance tutorials have been developed for R. Here are a few
@@ -73,9 +77,15 @@ If you are a graduate student in 678 please set up an account (you will need you
 
 Unity staff maintain a Slack channel for help to solves bioinformatics-related issues. To join the Unity Slack community, please sign up with your UMass email [here](https://unity-user-community.slack.com/join/signup#/domain-signup). If you’re unable to register with your school email, please contact hpc\@umass.edu with your preferred email address and they’ll send you a direct invite.
 
-### The RStudio Integrated Devopement Environment (IDE)
+#### DIY - Installing R and RStudio on your computer
 
-The most popular way to write R programs and to interactively run code and create graphs is using the <a href="https://posit.co/products/open-source/rstudio/" target="_blank">RStudio Integrated Devopement Environment (IDE)</a>. It is open source software that is available for free. There are other ways to write and run R code, such as using text editors, VS Code editors, Neovim or Jupyter Notebooks, but we will focus on RStudio in this class.
+I run R and RStudio on my computer. You can too. Everything we do in this class you should be able to do from your laptop. 
+
+1. Install the latest release (2024-06-14, Race for Your Life) R-4.4.1 of R from <a href="http://cran.r-project.org/">CRAN</a> and follow the installation instructions. If you have an older verion of R on your computer please update to this release as I can't guarantee the labs will work on older versions.
+
+2. Install <a href="http://www.rstudio.org/">R Studio</a>, a nice graphical interface for working with R.  
+
+3. Open RStudio and install `tidyverse` under Tools > Install Packages. You will need to install other packages as well for this and future labs. 
 
 #### Working in RStudio
 
@@ -159,9 +169,9 @@ If you are working on Posit Cloud or the Unity You will need to first export (do
 
 ![](images/lab1/Export_lab.png){alt="Exporting html file"}
 
-### Writing R code
+## Writing R code
 
-#### Assignment statements
+### Assignment statements
 
 All R statements where you create objects are called assignment statements and the form "object_name \<- value"
 
@@ -177,7 +187,7 @@ x
 
 You will make lots of assignments and \<- is a pain to type. Instead, use RStudio's keyboard shortcut: Alt + - (the minus sign). Notice that RStudio automagically surrounds \<- with spaces, which is a good code formatting practice. An equals sign = will work in place of \<-, but it will cause confusion later so keep to the convention of using \<- to make assignments
 
-#### Object Names
+### Object Names
 
 Object names must start with a letter, and can only contain letters, numbers, underscores and periods. You want your object names to be descriptive, so you'll need a convention for multiple words. I recommend snake_case where you separate lowercase words with an underscore. Note that R is case sensitive, e.g., object names gene, GENE, Gene are all different.
 
@@ -187,7 +197,7 @@ genome_size <- 3100000000
 
 **Important note:** since there are many built-in functions in R, make sure that the new object names you assign are not already used by the system. A simple way of checking this is to type in the name you want to use. If the system returns an error message telling you that such object is not found, it is safe to use the name. 
 
-#### Characters
+### Characters
 
 A character object is used to represent string values in R. It is defined by double quotes "".
 
@@ -196,16 +206,54 @@ DNA <- "ATGAAA"
 DNA
 ```
 
-#### Some examples and checking your `Environment` in the top right menu
+### Vectors
+
+A vector is a sequence of data elements of the same basic type. data elements in a vector are officially called components. Assignment operator (<-) stores the value (object) on the right side of (<-) expression in the left side. Once assigned, the object can be used just as an ordinary component of the computation. The c function concanenates the components into a vector.
 
 ```{r}
-x <- 2 
+random_numbers <- c(1,10,100)    
+random_numbers
+```
+
+Now you can do scalar computations on a vector
+
+```{r}
+random_numbers * 2
+```
+
+or use sum, sort, min, max, length and many other operations.  For example
+
+```{r}
+sort(random_numbers)
+```
+
+You can also do vector arithmatic
+
+```{r}
+random_numbers <- c(1,10,100) 
+y<- c(1,2,3) 
+random_numbers * y
+```
+
+Vectors can also be made of characters
+
+```{r}
+codons<- c("AUG", "UAU", "UGA") 
+codons
 ```
 
 ## Exercises
 
+The main goal for today's lab is to create the lab report so we need a few exercises to fill it out
 
+### Exercise 1
 
+For x = 2 and y = 15, compute the sum and difference of x and y
 
+### Exercise 2
 
+Create a vector of the values 22, 62, 148, 43 and 129. Multiple the vector by 5.
 
+### Exercise 3
+
+Create a vector of the nucleotides A, T, C and G. Remember to put a "" around each letter. Arrange the nucleotides alphabetically using the sort function `sort(vector_name) 
