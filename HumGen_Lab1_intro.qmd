@@ -256,4 +256,4 @@ Create a vector of the values 22, 62, 148, 43 and 129. Multiple the vector by 5.
 
 ### Exercise 3
 
-Create a vector of the nucleotides A, T, C and G. Remember to put a "" around each letter. Arrange the nucleotides alphabetically using the sort function `sort(vector_name) 
+Create a vector of the nucleotides A, T, C and G. Remember to put a "" around each letter. Arrange the nucleotides alphabetically using the sort function `sort(vector_name)` 
