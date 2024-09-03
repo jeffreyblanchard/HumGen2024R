@@ -63,7 +63,7 @@ There are also many workshops and online R courses that you could take to follow
 
 #### Bio478 and Bio678
 
-[Posit Cloud](https://posit.cloud/) and create an account. I will share the link for our Workspace in an Announcement on Canvas. The steps are
+Log into [Posit Cloud](https://posit.cloud/) and create an account. I will share the link for our Workspace in an Announcement on Canvas. The steps are
 
 -   Click on Link in Canvas
 -   Join HumGen Workspace
@@ -77,7 +77,7 @@ If you are a graduate student in 678 please set up an account (you will need you
 
 Unity staff maintain a Slack channel for help to solves bioinformatics-related issues. To join the Unity Slack community, please sign up with your UMass email [here](https://unity-user-community.slack.com/join/signup#/domain-signup). If you’re unable to register with your school email, please contact hpc\@umass.edu with your preferred email address and they’ll send you a direct invite.
 
-#### DIY - Installing R and RStudio on your computer
+#### DIYers - Installing R and RStudio on your computer
 
 I run R and RStudio on my computer. You can too. Everything we do in this class you should be able to do from your laptop. 
 

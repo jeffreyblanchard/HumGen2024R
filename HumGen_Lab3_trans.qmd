@@ -1,0 +1,166 @@
+---
+title: 'Lab 3 : Data Transformation with dplyr'
+---
+
+## Learning objectives
+
+-   dplyr
+
+## Load libaries
+
+```{r}
+library(tidyverse)
+library(nycflights13)
+```
+
+
+## Introduction to Data Transformation
+
+### Tables
+
+How they are displayed in your qmd file is different from how they are rendered into a html, pdf and other files.  
+
+### Pipes 
+
+In the last few years `|>` pipe was introduced as a simpler alternative to the `%>%` pipe that has been used in R and Tidyverse for the last 10 years. In many online examples you will see the `%>%` used. For many uses in this class they are interchangeable. 
+
+Ctrl/Cmd + Shift + M.
+
+Ctrl + Alt + I
+
+### Checking each line of codes are you write it
+
+Today we will see in Chapter 4 the following code chunk
+
+```{r}
+flights |>
+  filter(dest == "IAH") |> 
+  group_by(year, month) |> 
+  summarize(
+    arr_delay = mean(arr_delay, na.rm = TRUE)
+  )
+```
+
+If I was writing the code I would check each line as a wrote it to make sure I was getting the right result and to simplify trouble shooting error messages
+
+```{r}
+flights |>
+  filter(dest == "IAH") 
+```
+
+```{r}
+flights |>
+  filter(dest == "IAH") |> 
+  group_by(year, month)
+```
+
+```{r}
+flights |>
+  filter(dest == "IAH") |> 
+  group_by(year, month) |> 
+  summarize(
+    arr_delay = mean(arr_delay, na.rm = TRUE)
+  )
+```
+### Assignment
+
+In the first lab with went over assignment of a number or a character sting to a variable
+
+x <- 2
+
+We can assign this to a new variable `IAH_arr_delay_by_month`
+
+```{r}
+IAH_arr_delay_by_month <- flights |>
+  filter(dest == "IAH") |> 
+  group_by(year, month) |> 
+  summarize(
+    arr_delay = mean(arr_delay, na.rm = TRUE)
+  )
+```
+
+Notice that nothing prints out. The new table is put in the data object `IAH_arr_delay_by_month`. Now you could use this object repeatedly in your code without running the larger code chunck above each time. You can view `IAH_arr_delay_by_month` by using view(IAH_arr_delay_by_month) or clicking on the object in the `Environment` window.
+
+### Writing pseudo code
+
+Was there a flight on every month of 2013?
+
+Before writing any code it is best to break this down into the tasks we need to accomplish
+
+1. filter flight data set to the year 2013
+2. show only 1 row for each month 
+3. display table to see if each month is present or count to see if rows equal 12
+
+This is actually the hard part of solving a coding challenge. Writing the codes is relatively easy when you know the steps
+
+```{r}
+flights |> 
+  filter(year == 2013) |> 
+  distinct(month)
+```
+
+## Exercises
+
+[R for Data Science Chapter 1](https://r4ds.hadley.nz/data-transform). 
+
+Today we will walk through Chapter 3 Data Transformation in R for Data Science. As we did last week, by putting the examples and exercises in our own Quarto Markdown file, we can create own personal path through the Chapter. 
+
+### 3.2.5 Exercises
+
+#### 1. In a single pipeline for each condition, find all flights that meet the condition:
+
+-   Had an arrival delay of two or more hours
+-   Flew to Houston (IAH or HOU)
+-   Were operated by United, American, or Delta
+-   Departed in summer (July, August, and September)
+-   Arrived more than two hours late, but didn’t leave late
+-   Were delayed by at least an hour, but made up over 30 minutes in flight
+
+#### 2. Sort flights to find the flights with longest departure delays. Find the flights that left earliest in the morning.
+
+#### 4. Was there a flight on every day of 2013?
+
+#### 5. Which flights traveled the farthest distance? Which traveled the least distance?
+
+#### 6. Does it matter what order you used filter() and arrange() if you’re using both? Why/why not? Think about the results and how much work the functions would have to do.
+
+### 3.3.5 Exercises
+
+#### 1. Compare (by using select()) dep_time, sched_dep_time, and dep_delay. How would you expect those three numbers to be related?
+
+#### 2. Brainstorm (show) as many ways as possible to select dep_time, dep_delay, arr_time, and arr_delay from flight
+
+
+#### 3. What happens if you specify the name of the same variable multiple times in a select() call?
+
+#### 4. Use the any_of() function in select(any_of()) with the following vector. What does the any_of() function do? Why might it be helpful in conjunction with this vector?
+
+```
+variables <- c("year", "month", "day", "dep_delay", "arr_delay")
+```
+
+
+#### 5. Does the result of running the following code surprise you? How do the select helpers deal with upper and lower case by default? How can you change that default (Hint use: ignore.case = FALSE)))
+
+```{r}
+flights |> 
+  select(contains("TIME"))
+```
+
+#### 6. Rename air_time to air_time_min to indicate units of measurement and move it to the beginning of the data frame.
+
+#### 7. Why doesn't the following work, and what does the error mean?
+
+```         
+flights |> 
+  select(tailnum) |> 
+  arrange(arr_delay)
+#> Error in `arrange()`:
+#> ℹ In argument: `..1 = arr_delay`.
+#> Caused by error:
+#> ! object 'arr_delay' not found
+```
+
+### What to upload to Canvas
+
+After you `Render` the qmd file to an html file, export the file to your computer and upload it to Canvas.

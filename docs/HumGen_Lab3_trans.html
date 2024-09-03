@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 2 : Data Visualization with ggplot</title>
+<title>Lab 3 : Data Transformation with dplyr</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -3024,21 +3024,18 @@ vertical-align: -.125em;
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#introduction-to-r-graphics" id="toc-introduction-to-r-graphics" class="nav-link" data-scroll-target="#introduction-to-r-graphics">Introduction to R Graphics</a>
+  <li><a href="#load-libaries" id="toc-load-libaries" class="nav-link" data-scroll-target="#load-libaries">Load libaries</a></li>
+  <li><a href="#introduction-to-data-transformation" id="toc-introduction-to-data-transformation" class="nav-link" data-scroll-target="#introduction-to-data-transformation">Introduction to Data Transformation</a>
   <ul class="collapse">
-  <li><a href="#ggplot2-and-the-grammar-of-graphics" id="toc-ggplot2-and-the-grammar-of-graphics" class="nav-link" data-scroll-target="#ggplot2-and-the-grammar-of-graphics">ggplot2 and the Grammar of Graphics</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
-  <li><a href="#tutorials-and-resources" id="toc-tutorials-and-resources" class="nav-link" data-scroll-target="#tutorials-and-resources">Tutorials and resources</a></li>
-  </ul></li>
-  <li><a href="#on-the-computer" id="toc-on-the-computer" class="nav-link" data-scroll-target="#on-the-computer">On the Computer</a>
-  <ul class="collapse">
-  <li><a href="#create-and-save-your-quarto-markdown-qmd-file" id="toc-create-and-save-your-quarto-markdown-qmd-file" class="nav-link" data-scroll-target="#create-and-save-your-quarto-markdown-qmd-file">Create and save your Quarto Markdown (qmd) file</a></li>
-  <li><a href="#installing-and-loading-r-packages" id="toc-installing-and-loading-r-packages" class="nav-link" data-scroll-target="#installing-and-loading-r-packages">Installing and loading R packages</a></li>
-  <li><a href="#data-for-todays-lab" id="toc-data-for-todays-lab" class="nav-link" data-scroll-target="#data-for-todays-lab">Data for today’s lab</a></li>
+  <li><a href="#tables" id="toc-tables" class="nav-link" data-scroll-target="#tables">Tables</a></li>
+  <li><a href="#pipes" id="toc-pipes" class="nav-link" data-scroll-target="#pipes">Pipes</a></li>
+  <li><a href="#checking-each-line-of-codes-are-you-write-it" id="toc-checking-each-line-of-codes-are-you-write-it" class="nav-link" data-scroll-target="#checking-each-line-of-codes-are-you-write-it">Checking each line of codes are you write it</a></li>
+  <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment">Assignment</a></li>
+  <li><a href="#writing-pseudo-code" id="toc-writing-pseudo-code" class="nav-link" data-scroll-target="#writing-pseudo-code">Writing pseudo code</a></li>
   </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#r-for-data-science-chapter-1." id="toc-r-for-data-science-chapter-1." class="nav-link" data-scroll-target="#r-for-data-science-chapter-1.">R for Data Science Chapter 1.</a></li>
+  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">3.2.5 Exercises</a></li>
   <li><a href="#what-to-upload-to-canvas" id="toc-what-to-upload-to-canvas" class="nav-link" data-scroll-target="#what-to-upload-to-canvas">What to upload to Canvas</a></li>
   </ul></li>
   </ul>
@@ -3048,7 +3045,7 @@ vertical-align: -.125em;
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 2 : Data Visualization with ggplot</h1>
+<h1 class="title">Lab 3 : Data Transformation with dplyr</h1>
 </div>
 
 
@@ -3066,146 +3063,259 @@ vertical-align: -.125em;
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
 <ul>
-<li>Instailling R packages</li>
-<li>Built-in R data sets and data set packages</li>
-<li>ggplot2</li>
+<li>dplyr</li>
 </ul>
 </section>
-<section id="introduction-to-r-graphics" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-to-r-graphics">Introduction to R Graphics</h2>
-<p>R provides comprehensive graphics utilities for visualizing and exploring scientific data. To date we have been making a few plots using the R Base Graphics. In addition, several more recent graphics environments extend these utilities. These include the <code>grid</code>, <code>lattice</code> and <code>ggplot2</code> packages. All have the roles, but <code>ggplot2</code> environment that is part of the Tidyverse package has become popular and is now used for many R packages and in scientific publications.</p>
-<section id="ggplot2-and-the-grammar-of-graphics" class="level3">
-<h3 class="anchored" data-anchor-id="ggplot2-and-the-grammar-of-graphics">ggplot2 and the Grammar of Graphics</h3>
-<p><code>ggplot2</code> is meant to be an implementation of the Grammar of Graphics, hence the gg in ggplot. The basic notion is that there is a grammar to the composition of graphical components in statistical graphics. By directly controlling that grammar, you can generate a large set of carefully constructed graphics from a relatively small set of operations. As Hadley Wickham (2010), the author of <code>ggplot2</code> said,</p>
-<p>“A good grammar will allow us to gain insight into the composition of complicated graphics, and reveal unexpected connections between seemingly different graphics.”</p>
-<p>That said learning good gradatmmar can be challenging, especially when the computer is catching your mistakes.</p>
-</section>
-<section id="section" class="level3">
-<h3 class="anchored" data-anchor-id="section"></h3>
-<p>https://ggplot2.tidyverse.org/index.html</p>
-</section>
-<section id="tutorials-and-resources" class="level3">
-<h3 class="anchored" data-anchor-id="tutorials-and-resources">Tutorials and resources</h3>
-<p>You can make amazing graphs with ggplot, but there is a long learning curve so we will have multiple lab sessions on ggplot and graphing. Here are a few different resources for <code>ggplot</code>.</p>
-<ul>
-<li>Hadley Wickham and Garrett Grolemund released the second edition of <a href="https://r4ds.hadley.nz/">R for Data Science</a>.</li>
-<li>Data Carpentry’s <a href="https://datacarpentry.org/R-ecology-lesson/">Data Analysis and Visualization in R for Ecologists</a></li>
-<li>For those with a visual learning style there is <a href="https://www.youtube.com/channel/UC2bWYX9h1KlaGWfTDuhASWg">Maria Nattestad’s Youtube videos</a></li>
-<li>The <a href="https://github.com/rstudio/cheatsheets/blob/master/data-visualization-2.1.pdf">ggplot cheatsheet</a></li>
-</ul>
-</section>
-</section>
-<section id="on-the-computer" class="level2">
-<h2 class="anchored" data-anchor-id="on-the-computer">On the Computer</h2>
-<section id="create-and-save-your-quarto-markdown-qmd-file" class="level3">
-<h3 class="anchored" data-anchor-id="create-and-save-your-quarto-markdown-qmd-file">Create and save your Quarto Markdown (qmd) file</h3>
-<p>Just like last week we will be writing our code in a Quarto Markdown (qmd) file. Remember to use the following formatting in your YAML block</p>
-<pre><code>---
-title: &quot;Lab 2 Data Visualization&quot;
-author: &quot;You&quot;
-format:
-  html:
-    toc: true
-    toc_float: true
-    embed-resources: true
-editor: visual
----</code></pre>
-</section>
-<section id="installing-and-loading-r-packages" class="level3">
-<h3 class="anchored" data-anchor-id="installing-and-loading-r-packages">Installing and loading R packages</h3>
-<p>In this course we will work with many different R packages that will need to fbe installed on your computer. I have already installed most of these packages for students on Posit Cloud. If you are working on your own computer or on Unity, you can install them using Tools &gt; Install Packages. You only need to install a package once!</p>
-<p>To work with an R package load it with the <code>library</code> command. I always load my packages at the beginning of my files.</p>
+<section id="load-libaries" class="level2">
+<h2 class="anchored" data-anchor-id="load-libaries">Load libaries</h2>
 <div class="cell">
 <details open>
 <summary>R code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The above warning: false command is used to suppress</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># known warning messages when rendering the qmd file</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<details open>
+<summary>R code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
-<section id="data-for-todays-lab" class="level3">
-<h3 class="anchored" data-anchor-id="data-for-todays-lab">Data for today’s lab</h3>
-<p>In most labs we will be loading in data from files (e.g. our 23andME SNP data). Today and next week for simplicity we will work with data sets that come with R and the are available as R packages.</p>
-<section id="data-sets-data-frames-that-come-with-r" class="level4">
-<h4 class="anchored" data-anchor-id="data-sets-data-frames-that-come-with-r">Data sets (data frames) that come with R</h4>
-<p>R contains pre-loaded data sets that will see in many examples posted on the internet. The <code>mtcars</code> and <code>iris</code> data sets are very popular. You can see the whole list by typing data(). This will pop up a window with a list of the data sets.</p>
+<section id="introduction-to-data-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-data-transformation">Introduction to Data Transformation</h2>
+<section id="tables" class="level3">
+<h3 class="anchored" data-anchor-id="tables">Tables</h3>
+<p>How they are displayed in your qmd file is different from how they are rendered into a html, pdf and other files.</p>
+</section>
+<section id="pipes" class="level3">
+<h3 class="anchored" data-anchor-id="pipes">Pipes</h3>
+<p>In the last few years <code>|&gt;</code> pipe was introduced as a simpler alternative to the <code>%&gt;%</code> pipe that has been used in R and Tidyverse for the last 10 years. In many online examples you will see the <code>%&gt;%</code> used. For many uses in this class they are interchangeable.</p>
+<p>Ctrl/Cmd + Shift + M.</p>
+<p>Ctrl + Alt + I</p>
+</section>
+<section id="checking-each-line-of-codes-are-you-write-it" class="level3">
+<h3 class="anchored" data-anchor-id="checking-each-line-of-codes-are-you-write-it">Checking each line of codes are you write it</h3>
+<p>Today we will see in Chapter 4 the following code chunk</p>
 <div class="cell">
 <details open>
 <summary>R code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The above eval: false statement is used because it will result</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># in an error when rendering the qmd file. </span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dest <span class="sc">==</span> <span class="st">&quot;IAH&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, month) <span class="sc">|&gt;</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">arr_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by &#39;year&#39;. You can override using the
+`.groups` argument.</code></pre>
 </div>
-<p>In class we will talk more about the structure of a data set, which can be summarized using the <code>str</code> command</p>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 3
+# Groups:   year [1]
+    year month arr_delay
+   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;
+ 1  2013     1     4.16 
+ 2  2013     2     5.40 
+ 3  2013     3    -1.19 
+ 4  2013     4    14.8  
+ 5  2013     5     0.972
+ 6  2013     6    11.1  
+ 7  2013     7    11    
+ 8  2013     8     0.705
+ 9  2013     9   -10.6  
+10  2013    10     1.81 
+11  2013    11    -1.78 
+12  2013    12    14.5  </code></pre>
+</div>
+</div>
+<p>If I was writing the code I would check each line as a wrote it to make sure I was getting the right result and to simplify trouble shooting error messages</p>
 <div class="cell">
 <details open>
 <summary>R code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dest <span class="sc">==</span> <span class="st">&quot;IAH&quot;</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 150
-Columns: 5
-$ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.…
-$ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.…
-$ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.…
-$ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.…
-$ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, s…</code></pre>
+<pre><code># A tibble: 7,198 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      517            515         2      830            819
+ 2  2013     1     1      533            529         4      850            830
+ 3  2013     1     1      623            627        -4      933            932
+ 4  2013     1     1      728            732        -4     1041           1038
+ 5  2013     1     1      739            739         0     1104           1038
+ 6  2013     1     1      908            908         0     1228           1219
+ 7  2013     1     1     1028           1026         2     1350           1339
+ 8  2013     1     1     1044           1045        -1     1352           1351
+ 9  2013     1     1     1114            900       134     1447           1222
+10  2013     1     1     1205           1200         5     1503           1505
+# ℹ 7,188 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
 </div>
-<p>You can see the whole data set by typing the name <code>iris</code> or by typing <code>view(iris)</code> which will pop up a window with the data set. However we don’t want to show all 150 observations (rows) of the iris data set in this document. We can use the <code>head</code> command to show just the first 5 rows.</p>
 <div class="cell">
 <details open>
 <summary>R code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dest <span class="sc">==</span> <span class="st">&quot;IAH&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-1          5.1         3.5          1.4         0.2  setosa
-2          4.9         3.0          1.4         0.2  setosa
-3          4.7         3.2          1.3         0.2  setosa
-4          4.6         3.1          1.5         0.2  setosa
-5          5.0         3.6          1.4         0.2  setosa
-6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<pre><code># A tibble: 7,198 × 19
+# Groups:   year, month [12]
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      517            515         2      830            819
+ 2  2013     1     1      533            529         4      850            830
+ 3  2013     1     1      623            627        -4      933            932
+ 4  2013     1     1      728            732        -4     1041           1038
+ 5  2013     1     1      739            739         0     1104           1038
+ 6  2013     1     1      908            908         0     1228           1219
+ 7  2013     1     1     1028           1026         2     1350           1339
+ 8  2013     1     1     1044           1045        -1     1352           1351
+ 9  2013     1     1     1114            900       134     1447           1222
+10  2013     1     1     1205           1200         5     1503           1505
+# ℹ 7,188 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open>
+<summary>R code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dest <span class="sc">==</span> <span class="st">&quot;IAH&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, month) <span class="sc">|&gt;</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">arr_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by &#39;year&#39;. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 3
+# Groups:   year [1]
+    year month arr_delay
+   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;
+ 1  2013     1     4.16 
+ 2  2013     2     5.40 
+ 3  2013     3    -1.19 
+ 4  2013     4    14.8  
+ 5  2013     5     0.972
+ 6  2013     6    11.1  
+ 7  2013     7    11    
+ 8  2013     8     0.705
+ 9  2013     9   -10.6  
+10  2013    10     1.81 
+11  2013    11    -1.78 
+12  2013    12    14.5  </code></pre>
 </div>
 </div>
 </section>
-<section id="data-sets-that-are-part-of-r-packages" class="level4">
-<h4 class="anchored" data-anchor-id="data-sets-that-are-part-of-r-packages">Data sets that are part of R packages</h4>
-<p>R for Data Science uses the <code>palmerpenguins</code> package, “which includes the penguins dataset containing body measurements for penguins on three islands in the Palmer Archipelago, and the ggthemes package, which offers a colorblind safe color palette. We will load these for our work today.”</p>
+<section id="assignment" class="level3">
+<h3 class="anchored" data-anchor-id="assignment">Assignment</h3>
+<p>In the first lab with went over assignment of a number or a character sting to a variable</p>
+<p>x &lt;- 2</p>
+<p>We can assign this to a new variable <code>IAH_arr_delay_by_month</code></p>
 <div class="cell">
 <details open>
 <summary>R code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>IAH_arr_delay_by_month <span class="ot">&lt;-</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dest <span class="sc">==</span> <span class="st">&quot;IAH&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, month) <span class="sc">|&gt;</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">arr_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by &#39;year&#39;. You can override using the
+`.groups` argument.</code></pre>
 </div>
-<p>Data Analysis and Visualization in R for Ecologists uses the <code>ratdat</code> package, a long-term dataset from Portal, Arizona, in the Chihuahuan desert.</p>
-<div class="cell">
-<details open>
-<summary>R code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ratdat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
-<p>The help command can be used to learn more about the <code>palmerpenguins</code> and <code>ratdat</code> packages. After running the below commands, in the right bottom corner under the <code>Help</code> tab the package documentation can be viewed</p>
-<div class="cell">
-<details open>
-<summary>R code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package=</span><span class="st">&quot;palmerpenguins&quot;</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package=</span><span class="st">&quot;ratdat&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
+<p>Notice that nothing prints out. The new table is put in the data object <code>IAH_arr_delay_by_month</code>. Now you could use this object repeatedly in your code without running the larger code chunck above each time. You can view <code>IAH_arr_delay_by_month</code> by using view(IAH_arr_delay_by_month) or clicking on the object in the <code>Environment</code> window.</p>
 </section>
+<section id="writing-pseudo-code" class="level3">
+<h3 class="anchored" data-anchor-id="writing-pseudo-code">Writing pseudo code</h3>
+<p>Was there a flight on every month of 2013?</p>
+<p>Before writing any code it is best to break this down into the tasks we need to accomplish</p>
+<ol type="1">
+<li>filter flight data set to the year 2013</li>
+<li>show only 1 row for each month</li>
+<li>display table to see if each month is present or count to see if rows equal 12</li>
+</ol>
+<p>This is actually the hard part of solving a coding challenge. Writing the codes is relatively easy when you know the steps</p>
+<div class="cell">
+<details open>
+<summary>R code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2013</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 1
+   month
+   &lt;int&gt;
+ 1     1
+ 2    10
+ 3    11
+ 4    12
+ 5     2
+ 6     3
+ 7     4
+ 8     5
+ 9     6
+10     7
+11     8
+12     9</code></pre>
+</div>
+</div>
 </section>
 </section>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<section id="r-for-data-science-chapter-1." class="level3">
-<h3 class="anchored" data-anchor-id="r-for-data-science-chapter-1."><a href="https://r4ds.hadley.nz/data-visualize">R for Data Science Chapter 1</a>.</h3>
-<p>Today we will walk through Chapter 1 of R for Data Science. By putting the examples and exercises in our own Quarto Markdown file, we can create own personal path through the Chapter. We will do all sections, except <code>1.6 Saving your plots</code> which we will learn later. In section <code>1.3</code> you only need to do exercises 1-5, 9 and 10. Make are readable report by delineating the sections (e.g. 1.2.3 Creating a ggplot) with hashtags so they are visible in your report outline.</p>
+<p><a href="https://r4ds.hadley.nz/data-transform">R for Data Science Chapter 1</a>.</p>
+<p>Today we will walk through Chapter 3 Data Transformation in R for Data Science. As we did last week, by putting the examples and exercises in our own Quarto Markdown file, we can create own personal path through the Chapter.</p>
+<section id="exercises-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-1">3.2.5 Exercises</h3>
+<section id="in-a-single-pipeline-for-each-condition-find-all-flights-that-meet-the-condition" class="level4">
+<h4 class="anchored" data-anchor-id="in-a-single-pipeline-for-each-condition-find-all-flights-that-meet-the-condition">1. In a single pipeline for each condition, find all flights that meet the condition:</h4>
+<ul>
+<li>Had an arrival delay of two or more hours</li>
+<li>Flew to Houston (IAH or HOU)</li>
+<li>Were operated by United, American, or Delta</li>
+<li>Departed in summer (July, August, and September)</li>
+<li>Arrived more than two hours late, but didn’t leave late</li>
+<li>Were delayed by at least an hour, but made up over 30 minutes in flight</li>
+</ul>
+</section>
+<section id="sort-flights-to-find-the-flights-with-longest-departure-delays.-find-the-flights-that-left-earliest-in-the-morning." class="level4">
+<h4 class="anchored" data-anchor-id="sort-flights-to-find-the-flights-with-longest-departure-delays.-find-the-flights-that-left-earliest-in-the-morning.">2. Sort flights to find the flights with longest departure delays. Find the flights that left earliest in the morning.</h4>
+</section>
+<section id="was-there-a-flight-on-every-day-of-2013" class="level4">
+<h4 class="anchored" data-anchor-id="was-there-a-flight-on-every-day-of-2013">4. Was there a flight on every day of 2013?</h4>
+</section>
+<section id="which-flights-traveled-the-farthest-distance-which-traveled-the-least-distance" class="level4">
+<h4 class="anchored" data-anchor-id="which-flights-traveled-the-farthest-distance-which-traveled-the-least-distance">5. Which flights traveled the farthest distance? Which traveled the least distance?</h4>
+</section>
+<section id="does-it-matter-what-order-you-used-filter-and-arrange-if-youre-using-both-whywhy-not-think-about-the-results-and-how-much-work-the-functions-would-have-to-do." class="level4">
+<h4 class="anchored" data-anchor-id="does-it-matter-what-order-you-used-filter-and-arrange-if-youre-using-both-whywhy-not-think-about-the-results-and-how-much-work-the-functions-would-have-to-do.">6. Does it matter what order you used filter() and arrange() if you’re using both? Why/why not? Think about the results and how much work the functions would have to do.</h4>
+</section>
 </section>
 <section id="what-to-upload-to-canvas" class="level3">
 <h3 class="anchored" data-anchor-id="what-to-upload-to-canvas">What to upload to Canvas</h3>
