@@ -6,6 +6,8 @@ format:
     toc: true
     toc_float: true
     embed-resources: true
+execute:
+  warning: false
 editor: visual
 ---
 
