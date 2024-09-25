@@ -101,7 +101,7 @@ flights |>
 
 ## Exercises
 
-[R for Data Science Chapter 1](https://r4ds.hadley.nz/data-transform). 
+[R for Data Science Chapter 3](https://r4ds.hadley.nz/data-transform). 
 
 Today we will walk through Chapter 3 Data Transformation in R for Data Science. As we did last week, by putting the examples and exercises in our own Quarto Markdown file, we can create own personal path through the Chapter. 
 
