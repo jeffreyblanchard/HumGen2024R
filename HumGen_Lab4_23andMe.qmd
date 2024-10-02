@@ -332,4 +332,4 @@ Using the graph you made in ex2 output a PNG file with the ppi = 300 and the app
 
 ### Exercise 13
 
-Load the png file of the graph from your images folder into your RMarkdown document.
+Load the png file of the graph from your images folder into your Quarto document.
