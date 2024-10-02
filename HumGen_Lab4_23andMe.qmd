@@ -1,0 +1,337 @@
+---
+title: 'Lab 4 : Data Transformation and graphing 23andMe data'
+---
+
+## Learning objectives
+
+-   Data Transformation using dplyr
+
+## Load libaries
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(DT)
+library(plotly)
+```
+
+## Learning objectives
+
+-   Using R Markdown to
+-   Reading and manipulating tables with tidyverse
+-   Making nice tables for your lab reports
+-   Resize graphs in Quarto
+-   Print graphics to a file (e.g. jpeg, pdf)
+-   Loading images into a Quarto file
+-   Making interactive graphs and in Quarto
+
+## Working with large files the Terminal Window (instead of Console)
+
+Often in bioinformatics we are working on files that are to large to be opened in R or on your computer. In R the file size is capped at 5 MB. If we try to open a larger file the following message appears
+
+![](images/file_too_large.png)
+
+We will use the `Terminal` window in the bottom left corner to explore large files to determine their structure. In this window we can use Unix commands if there are available on your computer (they are available on Posit Cloud and Unity). **Note these are Unix and not R commands.** In terminal we can use the Unix command `head` to look at the first 50 lines in the file `23andMe_complete.txt` in the data directory.
+
+```{r}
+#| eval: false
+head -25 data/23andMe_complete.txt
+```
+
+Notice that the first 14 lines contain information about the file and have hash tags #. `rsid` numbers can be linked to data in NCBI's [SNP database](https://www.ncbi.nlm.nih.gov/snp/rs4477212) and other resources. To look at the last 25 lines use `tail`
+
+```{r}
+#| eval: false
+tail -25 data/23andMe_complete.txt
+```
+
+We can see that the mitochondrial DNA only has 1 allele since it is a haploid rather the diploid genome
+
+## Reading files with tidyverse
+
+It is important to understand data and objects types, particularly when we are importing data. R will try to try to make a best guess, but it is up to you to make sure the data read into R as you would like.
+
+All the data files for a lab will be in your RCloud project `data` directory. To import a file you must include the correct location of the file relative to where your .Rmd file is located. Let's try to read in a SNP genotype file from 23andMe. To read this into R using `read_tsv` (tab separated values) and ignore the comment lines containing #.
+
+```{r}
+#| eval: false
+SNPs_23andMe <- read_tsv("data/23andMe_complete.tsv", comment = '#')
+```
+
+Look in the `Environment` window at the SNPs_23andMe object. Notice that the columns names are `rs548049170`, `1`, `69869` and `TT`. This is because there is a hash tag on the line with the column names (as seen above in terminal). Bummer but we can work with that while importing the file
+
+```{r}
+SNPs_23andMe <- read_tsv("data/23andMe_complete.tsv", comment = '#', col_names = FALSE) |>
+  setNames(c("rsid","chromosome","position","genotype")) 
+```
+
+Look again in the `Environment` window at the SNPs_23andMe object. Notice the column names are now correct, but we want `chromosome` and \`genotype to be treated as factors. Let's make the change now.
+
+```{r}
+SNPs_23andMe <- SNPs_23andMe |> 
+  mutate(chromosome = as.factor(chromosome)) |>
+  mutate(genotype = as.factor(genotype))  
+```
+
+## Data transformation
+
+Data transformation for making graphs and statistical analyses is a big part of this course. Today we will touch upon a few of the basics using the above data. Check out [dplyr vignettes](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) for more examples. Manipulating data in the `tidyverse` uses pipes `|>` or %>%` to chain together steps. So if we want to filter the `UMass_COVID_data` to cases greater than 50. In this case we are not changing what is in the `UMass_COVID_data` data object
+
+```{r}
+SNPs_23andMe |> 
+  filter(position < 10) 
+```
+
+We can string them together
+
+```{r}
+SNPs_23andMe |>
+  filter(genotype == 'T') |>
+  filter(chromosome == 'MT') |> 
+  filter(position < 100) 
+```
+
+To the number of rsids for each chromosome (notice we are not counting rsids but the number of times each factor in chromosome appears)
+
+```{r}
+SNPs_23andMe |>
+  count(chromosome)
+```
+
+```{r}
+SNPs_23andMe |>
+  filter(chromosome == 'MT') |> 
+  count(chromosome)
+```
+
+We can arrange the order of the chromosomes by the number of rsids
+
+```{r}
+SNPs_23andMe |> 
+  count(chromosome) |> 
+  arrange(n)
+```
+
+To make a table of genotype counts for each chromosome use `group_by`
+
+```{r}
+SNPs_23andMe |> 
+  group_by(chromosome, genotype) |> 
+  count(genotype)
+```
+
+To select a subset of columns
+
+```{r}
+SNPs_23andMe |>
+  select(rsid, chromosome)
+```
+
+Note that none of the above creates a new data object. To do this and display
+
+```{r}
+SNPs_23andMe_counts <-SNPs_23andMe |>
+  count(chromosome)
+# to display data frame / tibble
+SNPs_23andMe_counts
+```
+
+Use `mutate` to add a new column
+
+```{r}
+SNPs_23andMe_summarize <-SNPs_23andMe |>
+  group_by(chromosome) |> 
+  summarize(rsid_count = n()) |> 
+  mutate(rsid_percent = rsid_count/sum(rsid_count))
+# to display data frame / tibble
+SNPs_23andMe_summarize
+```
+
+There are other functions you can use in summarize (<https://dplyr.tidyverse.org/reference/summarise.html>). For example, getting the minimum or maximum value in a range.
+
+```{r}
+SNPs_23andMe |>
+  group_by(chromosome) |> 
+  summarize(min_position = min(position), max_position = max(position)) 
+```
+
+## Making tables in R Markdown reports
+
+You can make tables using `knitr`
+
+```{r}
+library(knitr)
+kable(SNPs_23andMe_counts, caption = "Number of rsids on each chromosome")
+```
+
+This works well for small tables, but for even moderate tables like above it takes up a lot of space. In the above example
+
+A better option is using the DT package, but \*\*\* Don't do this with tables of hundreds of thousands of rows (as in your complete SNP table).
+
+```{r}
+library(DT)
+datatable(SNPs_23andMe_counts)
+```
+We can click on the table to reorganize the data.
+
+## Fine tuning ggplots
+
+Another good reference for ggplots is <a href="http://www.cookbook-r.com/Graphs/">Cookbook for R by Winston Chang</a> Please take your time and go through the following web pages.
+
+-   <a href="http://www.cookbook-r.com/Graphs/Titles_(ggplot2)/">Cookbook for R - Title</a>
+-   <a href="http://www.cookbook-r.com/Graphs/Axes_(ggplot2)/">Cookbook for R - Axes</a>
+-   <a href="http://www.cookbook-r.com/Graphs/Legends_(ggplot2)/">Cookbook for R - Legends</a>
+-   <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/">Cookbook for R - Colors</a>
+
+Here are a couple of cheatsheets that can be useful
+
+-   <a href="http://www.rstudio.com/wp-content/uploads/2015/12/ggplot2-cheatsheet-2.0.pdf">R Studio ggplot2 cheatsheet</a>
+-   <a href="https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf">RMarkdown cheatsheet</a>
+
+### Controlling graph size in Quarto and R Markdown
+
+As of writing this lab I have not been able to control computed figure dimensions in a R chunk with [Quarto executions](https://quarto.org/docs/computations/execution-options.html), but the R Markdown format is working. The dimensions of an individual graph in a R Markdown document be adjusted by specifying the graph dimensions as below
+
+```{r, fig.width = 8, fig.height = 2}
+# to adjust figure size {r, fig.width = 8, fig.height = 2}
+ggplot(data = SNPs_23andMe, mapping = aes(x = genotype)) + 
+  geom_bar() + 
+  ggtitle("Total SNPs for each genotype") +
+  ylab("Total number of SNPs") +
+  xlab("Genotype")
+```
+
+```{r, fig.width = 4, fig.height = 4}
+# to adjust figure size {r, fig.width = 3, fig.height = 3}
+ggplot(data = SNPs_23andMe, mapping = aes(x = genotype)) + 
+  geom_bar() + 
+  ggtitle("Total SNPs for each genotype") +
+  ylab("Total number of SNPs") +
+  xlab("Genotype")
+```
+
+### Graphic Output
+
+You may have realized that you can export plots in R Studio by clicking on Export in the Plots window that appears after you make a graph. You can save as a pdf, svg, tiff, png, bmp, jpeg and eps. You can also write the output directly to a file. This is particularly useful for controling the final dimensions in a reproducible way and for manuscripts.
+
+-   [Cookbook for R - Output to a file - PDF, PNG, TIFF, SVG](http://www.cookbook-r.com/Graphs/Output_to_a_file/)
+-   [Figures in Quarto](https://quarto.org/docs/authoring/figures.html)
+
+```{r}
+# Plot graph to a pdf outputfile
+pdf("images/SNP_example_plot.pdf", width=6, height=3)
+ggplot(data = SNPs_23andMe) + 
+  geom_bar(mapping = aes(x = chromosome, fill = genotype))
+dev.off()
+```
+
+```{r}
+# Plot graph to a png outputfile
+ppi <- 300
+png("images/SNP_example_plot.png", width=6*ppi, height=6*ppi, res=ppi)
+ggplot(data = SNPs_23andMe) + 
+  geom_bar(mapping = aes(x = chromosome, fill = genotype))
+dev.off()
+```
+
+For more details on sizing output <a href="http://www.cookbook-r.com/Graphs/Output_to_a_file/">Cookbook for R - Output to a file - PDF, PNG, TIFF, SVG </a>
+
+### Loading images into Quarto documents
+
+Sometimes it is useful in controling the image layout for a report to file with the graph and then subsequently load it into the .Rmd file. This works with png files, but not pdfs. You can also upload images made with other bioinformatic tools into your RMarkdown report.
+
+```{r}
+#| eval: false
+# This is the RMarkdown style for inserting images
+# Your image must be in your working directory
+# This command is put OUTSIDE the r code chunk
+
+![Genotype counts per chromosome](images/SNP_example_plot.png) 
+```
+
+![Genotype counts per chromosome](images/SNP_example_plot.png)
+
+Another way to present a graph without the code is adding echo = FALSE within the r{} chunk - {r echo = FALSE}. This prevents code, but not the results from appearing in the knitr file.
+
+### Interactive graphs in RMarkdown reports
+
+With plotly/ggplotly (<https://plot.ly/ggplot2/>) you can make interactive graphs in your lab report.
+
+```{r}
+library(plotly)
+```
+
+```{r}
+#| eval: false
+#| message: false
+# Version 1 1
+p <- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + 
+  geom_point()
+ggplotly(p)
+```
+
+```{r}
+#| message: false
+# Version 2
+ggplotly(
+  ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + 
+    geom_point()
+ )
+```
+
+## Exercises
+
+Use the 23andMe complete data set for the exercises. Pay attention to how your graphs look in today's final knitted lab report. You will be docked points if the graphs do not look nice (e.g. overlapping column names, truncated legends, ets.)
+
+### Exercise 1
+
+Subset (select) the 23andMe complete data frame to just position and genotype
+
+### Exercise 2
+
+Filter to just the MT chromosome and remove genotypes A and T. (you can use != to remove).
+
+### Exercise 3
+
+Use `group_by()` and `summarize()` to find the first position, last position and number of positions (SNPs) measured for each chromosome. Note that each position represents a SNP, therefore the number of SNPs for a chromosome = the number of positions measured on each chromosome.
+
+### Exercise 4
+
+Building on ex3 create use `mutate` to create new column with the density of SNPs for each chromosome based the total number of SNPs divided by the last position - first position
+
+### Exercise 5
+
+Building on ex3 sort chromosomes based on SNP density.
+
+### Exercise 6
+
+Make a table for your report using DT to show SNP density
+
+
+### Exercise 7
+
+Using ggplot make a make a bar graph of the total SNP counts for each chromosome. Add title and labels for the x and y axis. Set the fill of the bars to yellow and the outline (color) to black.
+
+### Exercise 8
+
+Modify ex1 to make a stacked bar graph with the contributions of each genotype to the total SNP count (Hint: use fill).
+
+### Exercise 9
+
+Turn ex2 into an interactive graph using plotly. Note: Titles in plotly often need to be wrapped. I do this using `labs(title = str_wrap("Total number of SNPs on each chromosome", 40)`.
+
+### Exercise 10
+
+Use `facet_wrap` to show each genotype as a separate graph (with a bar plot of counts per chromosomes).
+
+### Exercise 11
+
+Revise ex4 using `scales="free_y"` in `facet_wrap` to allow better show the variation in each graph.
+
+### Exercise 12
+
+Using the graph you made in ex2 output a PNG file with the ppi = 300 and the appropriate width and height so the image looks nice.
+
+### Exercise 13
+
+Load the png file of the graph from your images folder into your RMarkdown document.

@@ -8,3 +8,5 @@ format:
     code-fold: show
     code-summary: "R code"
     embed-resources: true
+execute:
+  warning: false

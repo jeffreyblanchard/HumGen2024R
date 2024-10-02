@@ -9,8 +9,8 @@ Introduction to R and Tidyverse
 * Lab 1 : [Introduction to R and Reproducible Research](HumGen_Lab1_intro.html)
 * Lab 2 : [Data Visualization with ggplot](HumGen_Lab2_ggplot.html)
 * Lab 3 : [Data Transformation with dplyr](HumGen_Lab3_trans.html)
-* Lab 4 : Data Transformation and Visualization with Covid data
-* Lab 5 : Communication
+* Lab 4 : [Data Transformation and Visualization with 23andMe data](HumGen_Lab4_23andMe.html)
+* Lab 5 : Data Transformation and Visualization with Covid data
 
 Gene Expression Analysis
 
