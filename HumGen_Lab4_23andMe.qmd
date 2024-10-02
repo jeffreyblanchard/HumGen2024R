@@ -35,14 +35,14 @@ We will use the `Terminal` window in the bottom left corner to explore large fil
 
 ```{r}
 #| eval: false
-head -25 data/23andMe_complete.txt
+head -25 data/23andMe_complete.tsv
 ```
 
 Notice that the first 14 lines contain information about the file and have hash tags #. `rsid` numbers can be linked to data in NCBI's [SNP database](https://www.ncbi.nlm.nih.gov/snp/rs4477212) and other resources. To look at the last 25 lines use `tail`
 
 ```{r}
 #| eval: false
-tail -25 data/23andMe_complete.txt
+tail -25 data/23andMe_complete.tsv
 ```
 
 We can see that the mitochondrial DNA only has 1 allele since it is a haploid rather the diploid genome
