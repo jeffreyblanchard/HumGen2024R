@@ -1,14 +1,15 @@
 ---
-title: Lab 1
+title: "Lab 4"
 author: "Your name"
 format:
   html:
     toc: true
     toc_float: true
     embed-resources: true
-execute:
-  warning: false
 editor: visual
+execute: 
+  warning: false
+  message: false
 ---
 
 # Examples and Exercises
@@ -30,4 +31,3 @@ library(tidyverse)
 ### 1.2.5 Exercises
 
 ## 1.3 ggplot2 calls
-
