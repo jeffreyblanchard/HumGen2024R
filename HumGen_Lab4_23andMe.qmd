@@ -312,11 +312,11 @@ Using ggplot make a make a bar graph of the total SNP counts for each chromosome
 
 ### Exercise 8
 
-Modify ex1 to make a stacked bar graph with the contributions of each genotype to the total SNP count (Hint: use fill).
+Modify ex 7 to make a stacked bar graph with the contributions of each genotype to the total SNP count (Hint: use fill).
 
 ### Exercise 9
 
-Turn ex2 into an interactive graph using plotly. Note: Titles in plotly often need to be wrapped. I do this using `labs(title = str_wrap("Total number of SNPs on each chromosome", 40)`.
+Turn ex 8 into an interactive graph using plotly. Note: Titles in plotly often need to be wrapped. I do this using `labs(title = str_wrap("Total number of SNPs on each chromosome", 40)`.
 
 ### Exercise 10
 
@@ -324,11 +324,11 @@ Use `facet_wrap` to show each genotype as a separate graph (with a bar plot of c
 
 ### Exercise 11
 
-Revise ex4 using `scales="free_y"` in `facet_wrap` to allow better show the variation in each graph.
+Revise ex10 using `scales="free_y"` in `facet_wrap` to allow better show the variation in each graph.
 
 ### Exercise 12
 
-Using the graph you made in ex2 output a PNG file with the ppi = 300 and the appropriate width and height so the image looks nice.
+Using the graph you made in exercise 8 output a PNG file with the ppi = 300 and the appropriate width and height so the image looks nice.
 
 ### Exercise 13
 
