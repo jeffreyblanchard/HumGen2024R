@@ -1,5 +1,5 @@
 ---
-title: 'Lab 5g (graduate students) : Mapping the COVID-19 reporting data'
+title: 'Lab 5 : Data Transformation and Visualization with COVID-19 reporting data'
 ---
 
 *I recognize, and fully understand, that this data maybe emotionally difficult to work. My intention is to make these lab relevant, allowing you to gather your own insights directly from new visualizations of the data. Please let me know if you would rather not work with the data.*
