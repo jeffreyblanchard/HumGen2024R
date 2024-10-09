@@ -11,7 +11,7 @@ Introduction to R and Tidyverse
 * Lab 3 : [Data Transformation with dplyr](HumGen_Lab3_trans.html)
 * Lab 4 : [Data Transformation and Visualization with 23andMe data](HumGen_Lab4_23andMe.html)
 * Lab 5 : [Data Transformation and Visualization with COVID-19 reporting data](HumGen_Lab5_covid.html)
-* Lab 5g : [Mapping the COVID-19 reporting data](HumGen_Lab5_covid_map.html)
+* Lab 5g : [Mapping the COVID-19 reporting data](HumGen_Lab5g_covid_map.html)
 
 Gene Expression Analysis
 
