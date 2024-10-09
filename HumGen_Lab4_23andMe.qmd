@@ -33,13 +33,13 @@ Often in bioinformatics we are working on files that are to large to be opened i
 
 We will use the `Terminal` window in the bottom left corner to explore large files to determine their structure. In this window we can use Unix commands if there are available on your computer (they are available on Posit Cloud and Unity). **Note these are Unix and not R commands.** In terminal we can use the Unix command `head` to look at the first 50 lines in the file `23andMe_complete.txt` in the data directory.
 
-```
+```         
 head -25 data/23andMe_complete.tsv
 ```
 
 Notice that the first 14 lines contain information about the file and have hash tags #. `rsid` numbers can be linked to data in NCBI's [SNP database](https://www.ncbi.nlm.nih.gov/snp/rs4477212) and other resources. To look at the last 25 lines use `tail`
 
-```
+```         
 tail -25 data/23andMe_complete.tsv
 ```
 
@@ -73,7 +73,7 @@ SNPs_23andMe <- SNPs_23andMe |>
 
 ## Data transformation
 
-Data transformation for making graphs and statistical analyses is a big part of this course. Today we will touch upon a few of the basics using the above data. Check out [dplyr vignettes](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) for more examples. Manipulating data in the `tidyverse` uses pipes `|>` or %>%` to chain together steps. So if we want to filter the `UMass_COVID_data` to cases greater than 50. In this case we are not changing what is in the `UMass_COVID_data` data object
+Data transformation for making graphs and statistical analyses is a big part of this course. Today we will touch upon a few of the basics using the above data. Check out [dplyr vignettes](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) for more examples. Manipulating data in the `tidyverse` uses pipes `|>` or %\>%`to chain together steps. So if we want to filter the`UMass_COVID_data`to cases greater than 50. In this case we are not changing what is in the`UMass_COVID_data\` data object
 
 ```{r}
 SNPs_23andMe |> 
@@ -170,6 +170,7 @@ A better option is using the DT package, but \*\*\* Don't do this with tables of
 library(DT)
 datatable(SNPs_23andMe_counts)
 ```
+
 We can click on the table to reorganize the data.
 
 ## Fine tuning ggplots
@@ -304,7 +305,6 @@ Building on ex3 sort chromosomes based on SNP density.
 ### Exercise 6
 
 Make a table for your report using DT to show SNP density
-
 
 ### Exercise 7
 
