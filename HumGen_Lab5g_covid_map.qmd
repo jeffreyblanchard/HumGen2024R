@@ -1,5 +1,5 @@
 ---
-title: 'Lab 5 : Data Transformation and Visualization with Covid data'
+title: 'Lab 5g (graduate students) : Data Transformation and Visualization with Covid data'
 ---
 
 ## Learning Objectives
