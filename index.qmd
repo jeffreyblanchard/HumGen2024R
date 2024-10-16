@@ -12,16 +12,17 @@ Introduction to R and Tidyverse
 * Lab 4 : [Data Transformation and Visualization with 23andMe data](HumGen_Lab4_23andMe.html)
 * Lab 5 : [Data Transformation and Visualization with COVID-19 reporting data](HumGen_Lab5_covid.html)
 * Lab 5g : [Mapping the COVID-19 reporting data](HumGen_Lab5g_covid_map.html)
+* Lab 6 : [Organizing DTC genetic testing reports and finding your genealogical ancestors](HumGen_Lab6_genealogical_ancestors.html)
+
 
 Gene Expression Analysis
 
-* Lab 6 : Normalization and Data Exploration
-* Lab 7 : Statistics
-* Lab 8 : Gene Ontology and Pathway Analysis
+* Lab 7 : Normalization and Data Exploration
+* Lab 8 : Statistics
+* Lab 9: Gene Ontology and Pathway Analysis
 
 SNPs and GWAS
 
-* Lab 9 : Ancestry
 * Lab 10 : Linking Your SNPs to published genome-wide association studies (GWASCAT)
 * Lab 11 : Data Transformation and Visualization with GWASCAT mappings I
 * Lab 12 : Data Transformation and Visualization with GWASCAT mappings II

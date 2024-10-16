@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Human Genome Analysis Spring 2024</title>
+<title>Lab 6 : Organizing DTC genetic testing reports and finding your genealogical ancestors</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -2985,13 +2985,43 @@ vertical-align: -.125em;
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#downloading-your-raw-dna-data" id="toc-downloading-your-raw-dna-data" class="nav-link" data-scroll-target="#downloading-your-raw-dna-data">Downloading your raw DNA data</a>
+  <ul class="collapse">
+  <li><a href="#andme" id="toc-andme" class="nav-link" data-scroll-target="#andme">23andMe</a></li>
+  <li><a href="#ancestry" id="toc-ancestry" class="nav-link" data-scroll-target="#ancestry">Ancestry</a></li>
+  <li><a href="#myheritage" id="toc-myheritage" class="nav-link" data-scroll-target="#myheritage">MyHeritage</a></li>
+  <li><a href="#using-other-resources." id="toc-using-other-resources." class="nav-link" data-scroll-target="#using-other-resources.">Using other resources.</a></li>
+  </ul></li>
+  <li><a href="#reports-that-maybe-available-to-you-from-your-dtc-kit-company" id="toc-reports-that-maybe-available-to-you-from-your-dtc-kit-company" class="nav-link" data-scroll-target="#reports-that-maybe-available-to-you-from-your-dtc-kit-company">Reports that maybe available to you from your DTC kit company</a>
+  <ul class="collapse">
+  <li><a href="#andme-categories" id="toc-andme-categories" class="nav-link" data-scroll-target="#andme-categories">23andMe Categories</a></li>
+  <li><a href="#myheritage-1" id="toc-myheritage-1" class="nav-link" data-scroll-target="#myheritage-1">MyHeritage</a></li>
+  <li><a href="#ancestry.com" id="toc-ancestry.com" class="nav-link" data-scroll-target="#ancestry.com">Ancestry.com</a></li>
+  </ul></li>
+  <li><a href="#popular-web-sites-and-open-source-software-for-constructing-genealogies" id="toc-popular-web-sites-and-open-source-software-for-constructing-genealogies" class="nav-link" data-scroll-target="#popular-web-sites-and-open-source-software-for-constructing-genealogies">Popular Web Sites and Open Source Software for Constructing Genealogies</a>
+  <ul class="collapse">
+  <li><a href="#open-genealogy-software" id="toc-open-genealogy-software" class="nav-link" data-scroll-target="#open-genealogy-software">Open Genealogy Software</a></li>
+  <li><a href="#online-genealogy-software-and-resources" id="toc-online-genealogy-software-and-resources" class="nav-link" data-scroll-target="#online-genealogy-software-and-resources">Online Genealogy Software and Resources</a></li>
+  <li><a href="#gedcom-files" id="toc-gedcom-files" class="nav-link" data-scroll-target="#gedcom-files">GEDcom files</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
+  </ul></li>
+  </ul>
+</nav>
 </div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Human Genome Analysis Spring 2024</h1>
+<h1 class="title">Lab 6 : Organizing DTC genetic testing reports and finding your genealogical ancestors</h1>
 </div>
 
 
@@ -3006,29 +3036,156 @@ vertical-align: -.125em;
 
 </header>
 
-<p>This is a rendering of hmtl files from the <a href="https://github.com/jeffreyblanchard/HumGen2024R">course repository</a> for Human Genome Analysis taught at the University of Massachusetts Amherst by Prof. Jeffrey Blanchard. If you are not using RStudio (Posit) Cloud here are <a href="HumGen_github.html">directions</a> for creating a RStudio project space that will sync with and download files from the course repo.</p>
-<p>Introduction to R and Tidyverse</p>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <ul>
-<li>Lab 1 : <a href="HumGen_Lab1_intro.html">Introduction to R and Reproducible Research</a></li>
-<li>Lab 2 : <a href="HumGen_Lab2_ggplot.html">Data Visualization with ggplot</a></li>
-<li>Lab 3 : <a href="HumGen_Lab3_trans.html">Data Transformation with dplyr</a></li>
-<li>Lab 4 : <a href="HumGen_Lab4_23andMe.html">Data Transformation and Visualization with 23andMe data</a></li>
-<li>Lab 5 : <a href="HumGen_Lab5_covid.html">Data Transformation and Visualization with COVID-19 reporting data</a></li>
-<li>Lab 5g : <a href="HumGen_Lab5g_covid_map.html">Mapping the COVID-19 reporting data</a></li>
-<li>Lab 6 : <a href="HumGen_Lab6_genealogical_ancestors.html">Organizing DTC genetic testing reports and finding your genealogical ancestors</a></li>
+<li>Learn the resources related to your genetic test kit</li>
+<li>Learn to use online Genealogy resources</li>
+<li>Construct a genealogy of yourself or someone you know</li>
 </ul>
-<p>Gene Expression Analysis</p>
+</section>
+<section id="downloading-your-raw-dna-data" class="level2">
+<h2 class="anchored" data-anchor-id="downloading-your-raw-dna-data">Downloading your raw DNA data</h2>
+<section id="andme" class="level3">
+<h3 class="anchored" data-anchor-id="andme">23andMe</h3>
+<p>Click on the icon with your name in the top right. Go to <code>Settings</code>. Scroll down to <code>Download Data</code>. You will have the following options</p>
 <ul>
-<li>Lab 7 : Normalization and Data Exploration</li>
-<li>Lab 8 : Statistics</li>
-<li>Lab 9: Gene Ontology and Pathway Analysis</li>
+<li>Your Reports Summary</li>
+<li>Ancestry Composition Raw Data</li>
+<li>Family Tree Data</li>
+<li>Raw Data (this is what we will use in later labs)</li>
+<li>Imputed Genotype Data R6</li>
+<li>Phased Genotype Data</li>
+<li>Profile Data</li>
+<li>Delete Data (Don’t do this yet)</li>
 </ul>
-<p>SNPs and GWAS</p>
+</section>
+<section id="ancestry" class="level3">
+<h3 class="anchored" data-anchor-id="ancestry">Ancestry</h3>
+<p>To download your DNA data for later labs click on the icon with your name in the top right. Go to <code>Settings</code>. Click on <code>DNA</code> in the left menu. Click on your <code>DNA test</code>. Scroll down to <code>Download your Data</code>. This is also the same sequence for deleting your kit.</p>
+<p>To download your genealogical tree. Click on <code>Trees</code> then <code>Create &amp; Manage Trees</code> then <code>Tree Settings</code>. The under <code>Manage your tree</code> export your family tree data, as a GEDCOM file, to your computer.</p>
+</section>
+<section id="myheritage" class="level3">
+<h3 class="anchored" data-anchor-id="myheritage">MyHeritage</h3>
+<p>To download your DNA data for later labs click on <code>DNA</code> then <code>Manage DNA Kits</code>. Click on the 3 stacked dots on the right to see the options including <code>Download kit</code> and <code>Delete kit</code>.</p>
+</section>
+<section id="using-other-resources." class="level3">
+<h3 class="anchored" data-anchor-id="using-other-resources.">Using other resources.</h3>
+<p>The two companies with the largest databases, Ancestry and 23andMe, do not allow for DNA results from other companies to be uploaded. However, the smaller companies (MyHeritage, Geni, FamilyTreeDNA, Gedmatch) allow for 23andMe and Ancestry results to be uploaded to their databases, so you can see your DNA results in your tools. Be very cautious in your decisions to upload your DNA to third party sites!</p>
+</section>
+</section>
+<section id="reports-that-maybe-available-to-you-from-your-dtc-kit-company" class="level2">
+<h2 class="anchored" data-anchor-id="reports-that-maybe-available-to-you-from-your-dtc-kit-company">Reports that maybe available to you from your DTC kit company</h2>
+<section id="andme-categories" class="level3">
+<h3 class="anchored" data-anchor-id="andme-categories">23andMe Categories</h3>
 <ul>
-<li>Lab 10 : Linking Your SNPs to published genome-wide association studies (GWASCAT)</li>
-<li>Lab 11 : Data Transformation and Visualization with GWASCAT mappings I</li>
-<li>Lab 12 : Data Transformation and Visualization with GWASCAT mappings II</li>
+<li>Ancestry
+<ul>
+<li>Ancestry Composition</li>
+<li>DNA Relatives List</li>
+<li>Neanderthal Ancestry (note Neanderthal ancestry is not subject to medical )</li>
+<li>Maternal Haplogroup</li>
+<li>Paternal Haplogroup</li>
+</ul></li>
+<li>Family and Friends
+<ul>
+<li>Family Tree</li>
+<li>DNA Relatives List</li>
+<li>Your Connections</li>
+<li>Share and Compare</li>
+</ul></li>
+<li>Health and Trait reports
+<ul>
+<li>Health Predisposition</li>
+<li>Pharmacogenetics</li>
+<li>Carrier Status</li>
+<li>Wellness</li>
+<li>Traits</li>
+</ul></li>
 </ul>
+</section>
+<section id="myheritage-1" class="level3">
+<h3 class="anchored" data-anchor-id="myheritage-1">MyHeritage</h3>
+<ul>
+<li>Ethnicity Estimate</li>
+<li>DNA matches Shared DNA matches</li>
+<li>DNA tools
+<ul>
+<li>Auto cluster</li>
+<li>cM explainer</li>
+<li>Ethnicity map</li>
+<li>Chromosome browser</li>
+</ul></li>
+<li>Health Reports
+<ul>
+<li>Genetic risks (can change risk comparison group)</li>
+<li>Carrier status</li>
+</ul></li>
+</ul>
+</section>
+<section id="ancestry.com" class="level3">
+<h3 class="anchored" data-anchor-id="ancestry.com">Ancestry.com</h3>
+<ul>
+<li>Ethnicity
+<ul>
+<li>Ancestral regions</li>
+<li>Ancestral journeys</li>
+<li>Regions by parent</li>
+<li>Chromosome painter</li>
+</ul></li>
+<li>DNA matches
+<ul>
+<li>ThruLines</li>
+<li>Shared Matches</li>
+<li>Shared Matches with shared cM (PRO)</li>
+<li>DNA compare</li>
+</ul></li>
+<li>Traits</li>
+</ul>
+</section>
+</section>
+<section id="popular-web-sites-and-open-source-software-for-constructing-genealogies" class="level2">
+<h2 class="anchored" data-anchor-id="popular-web-sites-and-open-source-software-for-constructing-genealogies">Popular Web Sites and Open Source Software for Constructing Genealogies</h2>
+<p>One of life’s biggest mysteries, “where did I come from?” is now a puzzle almost anyone can piece together, at least when it comes to your ancestry. With the evolution of the Internet, genealogy has become a hot hobby. Genealogy is now the second most popular hobby in the U.S. after gardening, and the second most visited category of website. It’s a billion dollar industry that has spawned television shows, scores of books and the advent of over-the-counter genetic test kits. Constructing a genealogy will be useful in this class for interpreting ancestry and trait-based results. There are many resources available not only the ones mentioned in the online sites, but Google, Facebook and the White Pages as will be discussed in class.</p>
+<section id="open-genealogy-software" class="level3">
+<h3 class="anchored" data-anchor-id="open-genealogy-software">Open Genealogy Software</h3>
+<ul>
+<li><p><a href="https://gramps-project.org/" target="_blank">GRAMPS Open Source Genealogy Software</a></p></li>
+<li><p><a href="https://gramps-project.org/wiki/index.php?title=Start_with_Genealogy" target="_blank">Getting started with Gramps</a></p>
+<p></p></li>
+</ul>
+</section>
+<section id="online-genealogy-software-and-resources" class="level3">
+<h3 class="anchored" data-anchor-id="online-genealogy-software-and-resources">Online Genealogy Software and Resources</h3>
+<ul>
+<li><a href="https://www.wikitree.com/" target="_blank">WikiTree</a> Free</li>
+<li><a href="https://www.familysearch.org" target="_blank">Family Search</a> Free</li>
+<li><a href="http://www.ancestry.com" target="_blank">Ancestry</a> Free 14 day trial (subscription afterwards)</li>
+<li><a href="http://www.myheritage.com" target="_blank">MyHeritage</a> (Free Basic Plan with 100 members)</li>
+</ul>
+</section>
+<section id="gedcom-files" class="level3">
+<h3 class="anchored" data-anchor-id="gedcom-files">GEDcom files</h3>
+<p>GEDCOM (GEnealogical Data COMmunications) is a data structure created for storing and exchanging genealogical information so that many different computer programs can use it. It is identified by the file type “.ged”. GEDcom files are text files that contain the information and linkages necessary to exchange genealogical data between two entities. The entities may use the same or different software application. As a text-based file, it is easily transmitted as an attachment to e-mails or downloaded from web sites. Most programs for family history can export and import GEDCOM (.ged) files. For example a genealogy constructed on Ancestry can be downloaded and opened in GRAMPS (or vice versa).</p>
+<p>GEDcom import/export instructions</p>
+<ul>
+<li><a href="https://support.ancestry.com/s/article/Uploading-and-Downloading-Trees" target="_blank">Ancestry GEDcom Import/Export</a></li>
+<li><a href="http://www.myheritage.com/help-center#/path/951685261" target="_blank">MyHeritage GEDcom Import/Export</a></li>
+</ul>
+</section>
+</section>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="exercise-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
+<p>Using screen shots capture your information from the web site, upload the screen shots to your report and organize it according to the catergories of information that is available from the DTC genetic test you choose (e.g. the information above).</p>
+</section>
+<section id="exercise-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2">Exercise 2</h3>
+<p>This is a good time to learn more about your families genealogical and medical history. The Ancestry and MyHeritage online database includes census, birth and death, marriage and other records. The US Census is particularly useful in the US for 1850-1950, for identifying family members living together. Ancestry includes recent (last 50 years) phone and address related records. The UMass libraries has <a href="https://guides.library.umass.edu/genealogy">genealogical sources</a>, including access to the <a href="https://www.ancestrylibrary.com/">Ancestry database</a> (but it does not automatically add records to your tree). This is useful once your free Ancestry subscription expires. I also have used Facebook and Public Records 360 to find recent living relations - http://www.publicrecords360.com/. If you are adopted, feel free to use your adopted parent’s genealogy.</p>
+<p>Construct a genealogy going back 4 generations of yourself or the DNA testing kit you are working with. Use Ancestry (you can use the resources on other sites) or GRAMPS to make the genealogy. If you anticipate having problems putting the genealogy together for any reason please contact me. Include images of this tree in your final report (due at the end of the semester).</p>
+</section>
+</section>
 
 </main>
 <!-- /main column -->

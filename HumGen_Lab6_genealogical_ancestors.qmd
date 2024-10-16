@@ -1,0 +1,141 @@
+---
+title: "Lab 6 : Organizing DTC genetic testing reports and finding your genealogical ancestors"
+---
+
+## Learning Objectives
+
+-   Learn the resources related to your genetic test kit
+-   Learn to use online Genealogy resources
+-   Construct a genealogy of yourself or someone you know
+
+## Downloading your raw DNA data
+
+### 23andMe
+
+Click on the icon with your name in the top right. Go to `Settings`. Scroll down to `Download Data`. You will have the following options
+
+-   Your Reports Summary
+-   Ancestry Composition Raw Data
+-   Family Tree Data
+-   Raw Data (this is what we will use in later labs)
+-   Imputed Genotype Data R6
+-   Phased Genotype Data
+-   Profile Data
+-   Delete Data (Don't do this yet)
+
+### Ancestry
+
+To download your DNA data for later labs click on the icon with your name in the top right. Go to `Settings`. Click on `DNA` in the left menu. Click on your `DNA test`. Scroll down to `Download your Data`. This is also the same sequence for deleting your kit. 
+
+To download your genealogical tree. Click on `Trees` then `Create & Manage Trees` then `Tree Settings`. The under `Manage your tree` export your family tree data, as a GEDCOM file, to your computer.
+
+### MyHeritage
+
+To download your DNA data for later labs click on `DNA` then `Manage DNA Kits`. Click on the 3 stacked dots on the right to see the options including `Download kit` and `Delete kit`. 
+
+### Using other resources.
+ 
+The two companies with the largest databases, Ancestry and 23andMe, do
+not allow for DNA results from other companies to be uploaded. However,
+the smaller companies (MyHeritage, Geni, FamilyTreeDNA, Gedmatch) allow for
+23andMe and Ancestry results to be uploaded to their databases, so you can see your DNA results in your tools. Be very cautious in your decisions to upload your DNA to third party sites!
+
+## Reports that maybe available to you from your DTC kit company
+
+### 23andMe Categories
+
+-   Ancestry
+    -   Ancestry Composition
+    -   DNA Relatives List
+    -   Neanderthal Ancestry (note Neanderthal ancestry is not subject
+        to medical )
+    -   Maternal Haplogroup
+    -   Paternal Haplogroup
+-   Family and Friends
+    -   Family Tree
+    -   DNA Relatives List
+    -   Your Connections
+    -   Share and Compare
+-   Health and Trait reports
+    -   Health Predisposition
+    -   Pharmacogenetics
+    -   Carrier Status
+    -   Wellness
+    -   Traits
+
+### MyHeritage
+
+-   Ethnicity Estimate
+-   DNA matches Shared DNA matches
+-   DNA tools
+    -   Auto cluster
+    -   cM explainer
+    -   Ethnicity map
+    -   Chromosome browser
+-   Health Reports
+    -   Genetic risks (can change risk comparison group)
+    -   Carrier status
+
+### Ancestry.com
+
+-   Ethnicity
+    -   Ancestral regions
+    -   Ancestral journeys
+    -   Regions by parent
+    -   Chromosome painter
+-   DNA matches
+    -   ThruLines
+    -   Shared Matches
+    -   Shared Matches with shared cM (PRO)
+    -   DNA compare
+-   Traits
+
+## Popular Web Sites and Open Source Software for Constructing Genealogies
+
+One of life’s biggest mysteries, “where did I come from?” is now a puzzle almost anyone can piece together, at least when it comes to your ancestry. With the evolution of the Internet, genealogy has become a hot hobby. Genealogy is now the second most popular hobby in the U.S. after gardening, and the second most visited category of website. It’s a billion dollar industry that has spawned television shows, scores of books and the advent of over-the-counter genetic test kits. Constructing a genealogy will be useful in this class for interpreting ancestry and trait-based results. There are many resources available not only the ones mentioned in the online sites, but Google, Facebook and the White Pages as will be discussed in class.
+
+### Open Genealogy Software
+
+-   <a href="https://gramps-project.org/" target="_blank">GRAMPS Open
+    Source Genealogy Software</a>
+
+-   <a href="https://gramps-project.org/wiki/index.php?title=Start_with_Genealogy" target="_blank">Getting
+    started with Gramps</a>
+
+    </p>
+
+### Online Genealogy Software and Resources
+
+-   <a href="https://www.wikitree.com/" target="_blank">WikiTree</a>
+    Free
+-   <a href="https://www.familysearch.org" target="_blank">Family
+    Search</a> Free
+-   <a href="http://www.ancestry.com" target="_blank">Ancestry</a> Free
+    14 day trial (subscription afterwards)
+-   <a href="http://www.myheritage.com" target="_blank">MyHeritage</a>
+    (Free Basic Plan with 100 members)
+
+### GEDcom files
+
+GEDCOM (GEnealogical Data COMmunications) is a data structure created for storing and exchanging genealogical information so that many different computer programs can use it. It is identified by the file type ".ged". GEDcom files are text files that contain the information and linkages necessary to exchange genealogical data between two entities. The entities may use the same or different software application. As a text-based file, it is easily transmitted as an attachment to e-mails or downloaded from web sites. Most programs for family history can export and import GEDCOM (.ged) files. For example a genealogy constructed on Ancestry can be downloaded and opened in GRAMPS (or vice versa).
+
+GEDcom import/export instructions
+
+-   <a href="https://support.ancestry.com/s/article/Uploading-and-Downloading-Trees" target="_blank">Ancestry
+    GEDcom Import/Export</a>
+-   <a href="http://www.myheritage.com/help-center#/path/951685261" target="_blank">MyHeritage
+    GEDcom Import/Export</a>
+
+## Exercises
+
+### Exercise 1
+
+Using screen shots capture your information from the web site, upload the screen shots to your report and organize it according to the catergories of information that is available from the DTC genetic test you choose (e.g. the information above). Put your images into a common folder (e.g. images/lab6).
+
+### Exercise 2
+
+This is a good time to learn more about your families genealogical and medical history. The Ancestry and MyHeritage online database includes census, birth and death, marriage and other records. The US Census is particularly useful in the US for 1850-1950, for identifying family members living together. Ancestry includes recent (last 50 years) phone and address related records. The UMass libraries has [genealogical sources](https://guides.library.umass.edu/genealogy), including access to the [Ancestry database](https://www.ancestrylibrary.com/) (but it does not automatically add records to your tree). This is useful once your free Ancestry subscription expires. I also have used Facebook and Public Records 360 to find recent living relations - http://www.publicrecords360.com/. If you are adopted, feel free to use your adopted parent's genealogy.
+
+Construct a genealogy going back 4 generations of yourself or the DNA testing kit you are working with. Use Ancestry (you can use the resources on other sites) or GRAMPS to make the genealogy. If you anticipate having problems putting the genealogy together for any reason please contact me. Include images of this tree in your final report (due at the end of the semester).
+
+
