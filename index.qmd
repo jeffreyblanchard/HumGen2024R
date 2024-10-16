@@ -14,7 +14,6 @@ Introduction to R and Tidyverse
 * Lab 5g : [Mapping the COVID-19 reporting data](HumGen_Lab5g_covid_map.html)
 * Lab 6 : [Organizing DTC genetic testing reports and finding your genealogical ancestors](HumGen_Lab6_genealogical_ancestors.html)
 
-
 Gene Expression Analysis
 
 * Lab 7 : Normalization and Data Exploration
