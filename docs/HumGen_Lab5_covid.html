@@ -3082,8 +3082,11 @@ vertical-align: -.125em;
   </ul></li>
   <li><a href="#on-the-computer" id="toc-on-the-computer" class="nav-link" data-scroll-target="#on-the-computer">On the Computer</a>
   <ul class="collapse">
-  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">Data Wrangling</a></li>
+  <li><a href="#loading-data-from-a-github-repository" id="toc-loading-data-from-a-github-repository" class="nav-link" data-scroll-target="#loading-data-from-a-github-repository">Loading data from a github repository</a></li>
+  <li><a href="#data-tidying---pivoting" id="toc-data-tidying---pivoting" class="nav-link" data-scroll-target="#data-tidying---pivoting">Data Tidying - Pivoting</a></li>
+  <li><a href="#dates-and-time" id="toc-dates-and-time" class="nav-link" data-scroll-target="#dates-and-time">Dates and time</a></li>
   </ul></li>
+  <li><a href="#making-graphs-from-the-time-series-data" id="toc-making-graphs-from-the-time-series-data" class="nav-link" data-scroll-target="#making-graphs-from-the-time-series-data">Making Graphs from the time series data</a></li>
   <li><a href="#animated-graphs-with-gganimate" id="toc-animated-graphs-with-gganimate" class="nav-link" data-scroll-target="#animated-graphs-with-gganimate">Animated Graphs with gganimate</a>
   <ul class="collapse">
   <li><a href="#installing-gganimate-and-gifski" id="toc-installing-gganimate-and-gifski" class="nav-link" data-scroll-target="#installing-gganimate-and-gifski">Installing gganimate and gifski</a></li>
@@ -3168,10 +3171,8 @@ vertical-align: -.125em;
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="data-wrangling" class="level3">
-<h3 class="anchored" data-anchor-id="data-wrangling">Data Wrangling</h3>
-<section id="loading-data" class="level4">
-<h4 class="anchored" data-anchor-id="loading-data">Loading data</h4>
+<section id="loading-data-from-a-github-repository" class="level3">
+<h3 class="anchored" data-anchor-id="loading-data-from-a-github-repository">Loading data from a github repository</h3>
 <p>We could load data directly into R each time we <code>knit</code>, it would make sure we have the most current data, but it is a time consuming step.</p>
 <p><em>This code is for dynamically loading the data from the site each time you run the chunk or render.</em></p>
 <div class="cell">
@@ -3199,7 +3200,11 @@ vertical-align: -.125em;
 </details>
 </div>
 <p>Check the table properties to make sure the data imported as we expected. Click on the file in the top right corner of R Studio under <code>Environment</code>.</p>
-<p>As noted above this data is in wide format. To convert to long format</p>
+</section>
+<section id="data-tidying---pivoting" class="level3">
+<h3 class="anchored" data-anchor-id="data-tidying---pivoting">Data Tidying - Pivoting</h3>
+<p>Today we will go over <a href="https://r4ds.hadley.nz/data-tidy.html">Chapter 5 in R for Data Sciences - Data Tiyding and Pivot</a></p>
+<p>As noted above this data is in wide format. To convert to long format we can use<code>pivot_longer</code></p>
 <div class="cell">
 <details open class="code-fold">
 <summary>R code</summary>
@@ -3208,7 +3213,10 @@ vertical-align: -.125em;
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">names_to =</span> <span class="st">&quot;Date&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Confirmed&quot;</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Let’s also change the format of Date to something that is easier to work with in graphs</p>
+</section>
+<section id="dates-and-time" class="level3">
+<h3 class="anchored" data-anchor-id="dates-and-time">Dates and time</h3>
+<p>Let’s also change the format of Date to something that is easier to work with in graphs. See <a href="https://r4ds.hadley.nz/datetimes">Chapter 17 in R for Data Sciences - Data Tiyding and Pivot</a></p>
 <div class="cell">
 <details open class="code-fold">
 <summary>R code</summary>
@@ -3217,8 +3225,9 @@ vertical-align: -.125em;
 </div>
 <p>Let’s look at the format of the data frame of time_series_confirmed_long by clicking on it in the top right corner of R Studio under <code>Environment.</code></p>
 </section>
-<section id="making-graphs-from-the-time-series-data" class="level4">
-<h4 class="anchored" data-anchor-id="making-graphs-from-the-time-series-data">Making Graphs from the time series data</h4>
+</section>
+<section id="making-graphs-from-the-time-series-data" class="level2">
+<h2 class="anchored" data-anchor-id="making-graphs-from-the-time-series-data">Making Graphs from the time series data</h2>
 <p>To make a times series graph of the confirmed cases we need to summarize the Country date to count up the individual state data for the US.</p>
 <div class="cell">
 <details open class="code-fold">
@@ -3345,8 +3354,6 @@ vertical-align: -.125em;
 </div>
 </div>
 </section>
-</section>
-</section>
 <section id="animated-graphs-with-gganimate" class="level2">
 <h2 class="anchored" data-anchor-id="animated-graphs-with-gganimate">Animated Graphs with gganimate</h2>
 <p>Animated graphs when down right have a great visual impact. You can do this in R and have your animations embedded on your web page. Essentially gganimate creates a series of files that are encompassed in a gif file. In addition to having this gif as part of your report file, you can save the gif and use in a slide or other presentations. It just takes a few lines of code to covert and existing ggplot graph into an animation. See <a href="https://gganimate.com/articles/gganimate.html">Tutorial for Getting Started with gganimate</a> and <a href="https://www.datanovia.com/en/blog/gganimate-how-to-create-plots-with-beautiful-animation-in-r/">gganimate: How to Create Plots with Beautiful Animation in R</a>.</p>
@@ -3424,8 +3431,8 @@ vertical-align: -.125em;
 </details>
 </div>
 </section>
-<section id="transform-the-data" class="level4">
-<h4 class="anchored" data-anchor-id="transform-the-data">Transform the data</h4>
+<section id="data-tidying-pivot-and-time" class="level4">
+<h4 class="anchored" data-anchor-id="data-tidying-pivot-and-time">Data tidying, pivot and time</h4>
 <div class="cell">
 <details open class="code-fold">
 <summary>R code</summary>
@@ -3440,8 +3447,8 @@ vertical-align: -.125em;
 </details>
 </div>
 </section>
-<section id="make-the-animated-graph" class="level4">
-<h4 class="anchored" data-anchor-id="make-the-animated-graph">Make the animated graph</h4>
+<section id="making-the-animated-graph" class="level4">
+<h4 class="anchored" data-anchor-id="making-the-animated-graph">Making the animated graph</h4>
 <div class="cell">
 <details open class="code-fold">
 <summary>R code</summary>

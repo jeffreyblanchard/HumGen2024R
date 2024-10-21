@@ -47,9 +47,7 @@ library(tidyverse)
 library(lubridate)
 ```
 
-### Data Wrangling
-
-#### Loading data
+### Loading data from a github repository
 
 We could load data directly into R each time we `knit`, it would make sure we have the most current data, but it is a time consuming step.
 
@@ -78,9 +76,14 @@ time_series_confirmed <- read_csv("data/time_series_covid19_confirmed_global.csv
   rename(Province_State = "Province/State", Country_Region = "Country/Region")
 ```
 
+
 Check the table properties to make sure the data imported as we expected. Click on the file in the top right corner of R Studio under `Environment`.
 
-As noted above this data is in wide format. To convert to long format
+### Data Tidying - Pivoting
+
+Today we will go over [Chapter 5 in R for Data Sciences - Data Tiyding and Pivot](https://r4ds.hadley.nz/data-tidy.html)
+
+As noted above this data is in wide format. To convert to long format we can use`pivot_longer`
 
 ```{r}
 time_series_confirmed_long <- time_series_confirmed |> 
@@ -88,7 +91,10 @@ time_series_confirmed_long <- time_series_confirmed |>
                             names_to = "Date", values_to = "Confirmed") 
 ```
 
-Let's also change the format of Date to something that is easier to work with in graphs
+
+### Dates and time
+
+Let's also change the format of Date to something that is easier to work with in graphs. See [Chapter 17 in R for Data Sciences - Data Tiyding and Pivot](https://r4ds.hadley.nz/datetimes)
 
 ```{r}
 time_series_confirmed_long$Date <- mdy(time_series_confirmed_long$Date)
@@ -96,7 +102,7 @@ time_series_confirmed_long$Date <- mdy(time_series_confirmed_long$Date)
 
 Let's look at the format of the data frame of time_series_confirmed_long by clicking on it in the top right corner of R Studio under `Environment.`
 
-#### Making Graphs from the time series data
+## Making Graphs from the time series data
 
 To make a times series graph of the confirmed cases we need to summarize the Country date to count up the individual state data for the US.
 
@@ -242,7 +248,7 @@ download.file(url="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/mas
   destfile = "data/time_series_covid19_deaths_global.csv")
 ```
 
-#### Transform the data
+#### Data tidying, pivot and time
 
 ```{r}
 time_series_deaths_confirmed <- read_csv("data/time_series_covid19_deaths_global.csv")|>
@@ -255,7 +261,7 @@ time_series_deaths_long <- time_series_deaths_confirmed |>
 time_series_deaths_long$Date <- mdy(time_series_deaths_long$Date)
 ```
 
-#### Make the animated graph
+#### Making the animated graph
 
 ```{r}
 p <- time_series_deaths_long |>
