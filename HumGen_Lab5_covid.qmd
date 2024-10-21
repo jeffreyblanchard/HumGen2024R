@@ -57,7 +57,7 @@ We could load data directly into R each time we `knit`, it would make sure we ha
 
 ```{r}
 #| eval: false
-time_series_confirmed <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")) %>%
+time_series_confirmed <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")) |>
   rename(Province_State = "Province/State", Country_Region = "Country/Region") 
 ```
 
@@ -74,7 +74,7 @@ In this case it is best to have the data on your computer and then load the file
 Then we can load the data.
 
 ```{r}
-time_series_confirmed <- read_csv("data/time_series_covid19_confirmed_global.csv")%>%
+time_series_confirmed <- read_csv("data/time_series_covid19_confirmed_global.csv")|>
   rename(Province_State = "Province/State", Country_Region = "Country/Region")
 ```
 
@@ -83,7 +83,7 @@ Check the table properties to make sure the data imported as we expected. Click 
 As noted above this data is in wide format. To convert to long format
 
 ```{r}
-time_series_confirmed_long <- time_series_confirmed %>% 
+time_series_confirmed_long <- time_series_confirmed |> 
                pivot_longer(-c(Province_State, Country_Region, Lat, Long),
                             names_to = "Date", values_to = "Confirmed") 
 ```
@@ -101,10 +101,10 @@ Let's look at the format of the data frame of time_series_confirmed_long by clic
 To make a times series graph of the confirmed cases we need to summarize the Country date to count up the individual state data for the US.
 
 ```{r}
-time_series_confirmed_long%>% 
-  group_by(Country_Region, Date) %>% 
-  summarise(Confirmed = sum(Confirmed)) %>% 
-  filter (Country_Region == "US") %>% 
+time_series_confirmed_long|> 
+  group_by(Country_Region, Date) |> 
+  summarise(Confirmed = sum(Confirmed)) |> 
+  filter (Country_Region == "US") |> 
   ggplot(aes(x = Date,  y = Confirmed)) + 
     geom_point() +
     geom_line() +
@@ -114,11 +114,11 @@ time_series_confirmed_long%>%
 Now several countries on the same graph
 
 ```{r}
-time_series_confirmed_long %>% 
-    group_by(Country_Region, Date) %>% 
-    summarise(Confirmed = sum(Confirmed)) %>% 
+time_series_confirmed_long |> 
+    group_by(Country_Region, Date) |> 
+    summarise(Confirmed = sum(Confirmed)) |> 
     filter (Country_Region %in% c("China","France","Italy", 
-                                "Korea, South", "US")) %>% 
+                                "Korea, South", "US")) |> 
     ggplot(aes(x = Date,  y = Confirmed, color = Country_Region)) + 
       geom_point() +
       geom_line() +
@@ -128,17 +128,17 @@ time_series_confirmed_long %>%
 The above graphs using the cumulative counts. Let's make a new table with the daily counts using the tidverse/dyplr [lag](https://dplyr.tidyverse.org/reference/lead-lag.html) function which subtracts a row from the previous row.
 
 ```{r}
-time_series_confirmed_long_daily <-time_series_confirmed_long %>% 
-    group_by(Country_Region, Date) %>% 
-    summarise(Confirmed = sum(Confirmed)) %>% 
+time_series_confirmed_long_daily <-time_series_confirmed_long |> 
+    group_by(Country_Region, Date) |> 
+    summarise(Confirmed = sum(Confirmed)) |> 
     mutate(Daily = Confirmed - lag(Confirmed, default = first(Confirmed )))
 ```
 
 Now for a graph with the US data
 
 ```{r}
-time_series_confirmed_long_daily %>% 
-    filter (Country_Region == "US") %>% 
+time_series_confirmed_long_daily |> 
+    filter (Country_Region == "US") |> 
     ggplot(aes(x = Date,  y = Daily, color = Country_Region)) + 
       geom_point() +
       ggtitle("COVID-19 Confirmed Cases")
@@ -147,8 +147,8 @@ time_series_confirmed_long_daily %>%
 A line graph version of the above
 
 ```{r}
-time_series_confirmed_long_daily %>% 
-    filter (Country_Region == "US") %>% 
+time_series_confirmed_long_daily |> 
+    filter (Country_Region == "US") |> 
     ggplot(aes(x = Date,  y = Daily, color = Country_Region)) + 
       geom_line() +
       ggtitle("COVID-19 Confirmed Cases")
@@ -157,8 +157,8 @@ time_series_confirmed_long_daily %>%
 Now with a curve fit
 
 ```{r}
-time_series_confirmed_long_daily %>% 
-    filter (Country_Region == "US") %>% 
+time_series_confirmed_long_daily |> 
+    filter (Country_Region == "US") |> 
     ggplot(aes(x = Date,  y = Daily, color = Country_Region)) + 
       geom_smooth() +
       ggtitle("COVID-19 Confirmed Cases")
@@ -167,8 +167,8 @@ time_series_confirmed_long_daily %>%
 By default, `geom_smooth()` adds a LOESS/LOWESS (Locally Weighted Scatterplot Smoothing) smoother to the data. That's not what we're after, though. Here is a fit using a generalized additive model (GAM)
 
 ```{r}
-time_series_confirmed_long_daily %>% 
-    filter (Country_Region == "US") %>% 
+time_series_confirmed_long_daily |> 
+    filter (Country_Region == "US") |> 
     ggplot(aes(x = Date,  y = Daily, color = Country_Region)) + 
       geom_smooth(method = "gam", se = FALSE) +
       ggtitle("COVID-19 Confirmed Cases")
@@ -208,7 +208,7 @@ theme_set(theme_bw())
 ```{r}
 
 
-daily_counts <- time_series_confirmed_long_daily %>% 
+daily_counts <- time_series_confirmed_long_daily |> 
       filter (Country_Region == "US")
 
 p <- ggplot(daily_counts, aes(x = Date,  y = Daily, color = Country_Region)) + 
@@ -245,10 +245,10 @@ download.file(url="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/mas
 #### Transform the data
 
 ```{r}
-time_series_deaths_confirmed <- read_csv("data/time_series_covid19_deaths_global.csv")%>%
+time_series_deaths_confirmed <- read_csv("data/time_series_covid19_deaths_global.csv")|>
   rename(Province_State = "Province/State", Country_Region = "Country/Region")
 
-time_series_deaths_long <- time_series_deaths_confirmed %>% 
+time_series_deaths_long <- time_series_deaths_confirmed |> 
     pivot_longer(-c(Province_State, Country_Region, Lat, Long),
         names_to = "Date", values_to = "Confirmed") 
 
@@ -258,8 +258,8 @@ time_series_deaths_long$Date <- mdy(time_series_deaths_long$Date)
 #### Make the animated graph
 
 ```{r}
-p <- time_series_deaths_long %>%
-  filter (Country_Region %in% c("US","Canada", "Mexico","Brazil","Egypt","Ecuador","India", "Netherlands", "Germany", "China" )) %>%
+p <- time_series_deaths_long |>
+  filter (Country_Region %in% c("US","Canada", "Mexico","Brazil","Egypt","Ecuador","India", "Netherlands", "Germany", "China" )) |>
   ggplot(aes(x=Country_Region, y=Confirmed, color= Country_Region)) + 
     geom_point(aes(size=Confirmed)) + 
     transition_time(Date) + 

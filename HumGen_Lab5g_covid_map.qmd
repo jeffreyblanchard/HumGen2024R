@@ -40,7 +40,7 @@ For this lab it is important to note that the time series data does not currentl
 Here is a graph containing all the coordinate information. Note this is not summarized by country. Since there is a point for each US county. There are many points in the US
 
 ```{r}
-daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/04-02-2020.csv")) %>% 
+daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/04-02-2020.csv")) |> 
   rename(Long = "Long_") 
 
     
@@ -58,12 +58,12 @@ ggplot(daily_report, aes(x = Long, y = Lat, size = Confirmed/1000)) +
 Zoom in on US 48 states. To do this Alaska, Hawaii and US Territories are filtered. Some US State entries have a Lat and Long of zero, so these are filtered as well. 
 
 ```{r}
-daily_report_filtered_US <- daily_report %>% 
-  filter(Country_Region == "US") %>% 
+daily_report_filtered_US <- daily_report |> 
+  filter(Country_Region == "US") |> 
   filter (!Province_State %in% c("Alaska","Hawaii", "American Samoa",
                   "Puerto Rico","Northern Mariana Islands", 
                   "Virgin Islands", "Recovered", "Guam", "Grand Princess",
-                  "District of Columbia", "Diamond Princess")) %>% 
+                  "District of Columbia", "Diamond Princess")) |> 
   filter(Lat > 0)
 ggplot(daily_report_filtered_US, aes(x = Long, y = Lat, size = Confirmed)) +
     borders("state", colour = "black", fill = "grey90") +
@@ -78,12 +78,12 @@ ggplot(daily_report_filtered_US, aes(x = Long, y = Lat, size = Confirmed)) +
 Here is a prettier version based on an example by Anisa Dhana
 
 ```{r}
-daily_report_filtered_Dhana <- daily_report %>% 
-  filter(Country_Region == "US") %>% 
+daily_report_filtered_Dhana <- daily_report |> 
+  filter(Country_Region == "US") |> 
   filter (!Province_State %in% c("Alaska","Hawaii", "American Samoa",
                   "Puerto Rico","Northern Mariana Islands", 
                   "Virgin Islands", "Recovered", "Guam", "Grand Princess",
-                  "District of Columbia", "Diamond Princess")) %>% 
+                  "District of Columbia", "Diamond Princess")) |> 
   filter(Lat > 0)
 
 mybreaks <- c(1, 100, 1000, 10000, 10000)
@@ -116,10 +116,10 @@ ggplot(daily_report_filtered_Dhana, aes(x = Long, y = Lat, size = Confirmed)) +
 ### Mapping data to shapes
 
 ```{r}
-daily_report_filtered_shapes <- daily_report %>% 
-  filter(Country_Region == "US") %>% 
-  group_by(Province_State) %>% 
-  summarize(Confirmed = sum(Confirmed)) %>% 
+daily_report_filtered_shapes <- daily_report |> 
+  filter(Country_Region == "US") |> 
+  group_by(Province_State) |> 
+  summarize(Confirmed = sum(Confirmed)) |> 
   mutate(Province_State = tolower(Province_State))
 # load the US map data
 us <- map_data("state")
@@ -151,15 +151,15 @@ library(RColorBrewer)
 # To display only colorblind-friendly brewer palettes, specify the option colorblindFriendly = TRUE as follow:
 # display.brewer.all(colorblindFriendly = TRUE)
 # Get and format the covid report data
-daily_report_filtered_shapes <- daily_report %>% 
-  unite(Key, Admin2, Province_State, sep = ".") %>% 
-  group_by(Key) %>% 
-  summarize(Confirmed = sum(Confirmed)) %>% 
+daily_report_filtered_shapes <- daily_report |> 
+  unite(Key, Admin2, Province_State, sep = ".") |> 
+  group_by(Key) |> 
+  summarize(Confirmed = sum(Confirmed)) |> 
   mutate(Key = tolower(Key))
 # dim(report_03_27_2020)
 # get and format the map data
 us <- map_data("state")
-counties <- map_data("county") %>% 
+counties <- map_data("county") |> 
   unite(Key, subregion, region, sep = ".", remove = FALSE)
 # Join the 2 tibbles
 state_join <- left_join(counties, daily_report_filtered_shapes, by = c("Key"))
@@ -179,10 +179,10 @@ ggplot(data = us, mapping = aes(x = long, y = lat, group = group)) +
 If we look at just Massachusetts
 
 ```{r}
-daily_report_filtered_MA <- daily_report %>% 
-  filter(Province_State == "Massachusetts") %>% 
-  group_by(Admin2) %>% 
-  summarize(Confirmed = sum(Confirmed)) %>% 
+daily_report_filtered_MA <- daily_report |> 
+  filter(Province_State == "Massachusetts") |> 
+  group_by(Admin2) |> 
+  summarize(Confirmed = sum(Confirmed)) |> 
   mutate(Admin2 = tolower(Admin2))
 us <- map_data("state")
 ma_us <- subset(us, region == "massachusetts")
@@ -233,8 +233,8 @@ Here is an example with the world map
 
 ```{r}
 # Read in the daily report
-daily_report_filtered_world <- daily_report %>% 
-  group_by(Country_Region) %>% 
+daily_report_filtered_world <- daily_report |> 
+  group_by(Country_Region) |> 
   summarize(Confirmed = sum(Confirmed), Deaths = sum(Deaths))
 # Read in the world map data
 world <- as_tibble(map_data("world"))
@@ -242,7 +242,7 @@ world <- as_tibble(map_data("world"))
 setdiff(world$region, daily_report$Country_Region) 
 # Many of these countries are considered states or territories in the JHU covid reports,
 # but let's fix a few of them
-world <- as_tibble(map_data("world")) %>% 
+world <- as_tibble(map_data("world")) |> 
  mutate(region = str_replace_all(region, c("USA" = "US", "Czech Republic" = "Czechia",  
         "Ivory Coast" = "Cote d'Ivoire", "Democratic Republic of the Congo" = "Congo (Kinshasa)", 
         "Republic of Congo" = "Congo (Brazzaville)")))
