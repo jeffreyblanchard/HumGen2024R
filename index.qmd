@@ -9,20 +9,23 @@ Introduction to R and Tidyverse
 * Lab 1 : [Introduction to R and Reproducible Research](HumGen_Lab1_intro.html)
 * Lab 2 : [Data Visualization with ggplot](HumGen_Lab2_ggplot.html)
 * Lab 3 : [Data Transformation with dplyr](HumGen_Lab3_trans.html)
-* Lab 4 : [Data Transformation and Visualization with 23andMe data](HumGen_Lab4_23andMe.html)
 * Lab 5 : [Data Transformation and Visualization with COVID-19 reporting data](HumGen_Lab5_covid.html)
-* Lab 5g : [Mapping the COVID-19 reporting data](HumGen_Lab5g_covid_map.html)
+* Lab 8 : Relational data and table joins
+
+Genetic testing, SNPs and GWAS
+
+* Lab 4 : [Data Transformation and Visualization with 23andMe data](HumGen_Lab4_23andMe.html)
 * Lab 6 : [Organizing DTC genetic testing reports and finding your genealogical ancestors](HumGen_Lab6_genealogical_ancestors.html)
-* Lab7 : [Lab 7 : How Many Genetic Ancestors Do I have?"](HumGen_Lab7_genetic_ancestors.html)
-
-SNPs and GWAS
-
-* Lab 7 : Linking Your SNPs to published genome-wide association studies (GWASCAT)
-* Lab 8 : Data Transformation and Visualization with GWASCAT mappings I
-* Lab 9 : Data Transformation and Visualization with GWASCAT mappings II
+* Lab 7 : [How Many Genetic Ancestors Do I have?"](HumGen_Lab7_genetic_ancestors.html)
+* Lab 9 : Data Transformation and Visualization with GWASCAT mappings I
+* Lab 10 : Data Transformation and Visualization with GWASCAT mappings II
 
 Gene Expression Analysis
 
-* Lab 10 : Normalization and Data Exploration
-* Lab 11 : Statistics
-* Lab 12: Gene Ontology and Pathway Analysis
+* Lab 11 : RNAseq - Normalization and Data Exploration
+* Lab 12: RNAseq - Gene Ontology and Pathway Analysis
+
+Special labs for graduates students in 678
+
+* Lab g1 : [Mapping the COVID-19 reporting data](HumGen_Labg1_covid_map.html)
+* Lab g2 : [Connecting a Github repo site with a RStudio project](HumGen_Labg2_github.html)
