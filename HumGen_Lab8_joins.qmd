@@ -39,3 +39,7 @@ Go through Sections 18.1 to 18.4 Chapter 18 [Joins](https://r4ds.hadley.nz/joins
 ### What to upload to Canvas
 
 After you `Render` the qmd file to an html file, export the file to your computer and upload it to Canvas.
+
+### Solutions to exercises
+
+Earlier we used solutions found in [R for Data Science (2e) - Solutions to Exercises](https://mine-cetinkaya-rundel.github.io/r4ds-solutions/), but there are no solution yet for Ch 19 on table joins. They can be found [Solutions Manual: R for Data Science (2e)](https://aditya-dahiya.github.io/RfDS2solutions/Chapter20.html)
