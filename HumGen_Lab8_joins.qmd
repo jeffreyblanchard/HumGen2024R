@@ -1,0 +1,41 @@
+---
+title: 'Lab 8 : Data tidying and transformation with table joins'
+---
+
+## Learning objectives
+
+-   Data Tidying and pivot longer
+-   Data Transformation using joins
+
+## Introduction
+
+### Load libaries
+
+```{r}
+library(tidyverse)
+library(nycflights13)
+```
+
+### Data Tidying
+
+In [Lab 5 : Data Transformation and Visualization with COVID-19 reporting data](HumGen_Lab5_covid.html) we used the `pivot_longer` function, but did not talk about it in depth. Often spreadsheets are designed for data entry, but this is not the optimum format for data analysis and graphing. Today we will walk through some of the key aspects of [Data Tidying](https://r4ds.hadley.nz/data-tidy). The data sets used in this chapter are loaded with the `tidyverse` package. 
+
+### Table Joins
+
+A common part of an analysis workflow is combining data from multiples sources. To do this a common element is needed to link the data tables. This is the `key` that is often described as an important element of relational databases. Often in genome analysis the key is a GenBank or other database ID. Chapter 18 [Joins](https://r4ds.hadley.nz/joins) in R for Data Science discusses the key types `primary`, `compound`, `foreign` and `surrogate`. Then goes over how to use keys in `mutating` and `filtering` joins.
+
+As an additional reference the [Tidyverse Cookbook](https://rstudio-education.github.io/tidyverse-cookbook/transform-tables.html#joins) has many practical solutions to problems including different ways to join tables.
+
+## Exercises
+
+### Part 1 Data Tidying
+
+Today you will go through Chapter 5 [Data Tidying](https://r4ds.hadley.nz/data-tidy) in R for Data Science. As we did last previously, by putting the examples in our own Quarto Markdown file. You do not need to do the exercises in this chapter.
+
+### Part 2 Table Joins
+
+Go through Sections 18.1 to 18.4 Chapter 18 [Joins](https://r4ds.hadley.nz/joins) in R for Data Science putting the examples and exercises in your Quarto file. 
+
+### What to upload to Canvas
+
+After you `Render` the qmd file to an html file, export the file to your computer and upload it to Canvas.

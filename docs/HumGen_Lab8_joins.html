@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Human Genome Analysis Spring 2024</title>
+<title>Lab 8 : Data tidying and transformation with table joins</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,6 +18,40 @@ ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+}
+pre.numberSource { margin-left: 3em; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -2985,13 +3019,31 @@ vertical-align: -.125em;
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#load-libaries" id="toc-load-libaries" class="nav-link" data-scroll-target="#load-libaries">Load libaries</a></li>
+  <li><a href="#data-tidying" id="toc-data-tidying" class="nav-link" data-scroll-target="#data-tidying">Data Tidying</a></li>
+  <li><a href="#table-joins" id="toc-table-joins" class="nav-link" data-scroll-target="#table-joins">Table Joins</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#part-1-data-tidying" id="toc-part-1-data-tidying" class="nav-link" data-scroll-target="#part-1-data-tidying">Part 1 Data Tidying</a></li>
+  <li><a href="#part-2-table-joins" id="toc-part-2-table-joins" class="nav-link" data-scroll-target="#part-2-table-joins">Part 2 Table Joins</a></li>
+  <li><a href="#what-to-upload-to-canvas" id="toc-what-to-upload-to-canvas" class="nav-link" data-scroll-target="#what-to-upload-to-canvas">What to upload to Canvas</a></li>
+  </ul></li>
+  </ul>
+</nav>
 </div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Human Genome Analysis Spring 2024</h1>
+<h1 class="title">Lab 8 : Data tidying and transformation with table joins</h1>
 </div>
 
 
@@ -3006,33 +3058,50 @@ vertical-align: -.125em;
 
 </header>
 
-<p>This is a rendering of hmtl files from the <a href="https://github.com/jeffreyblanchard/HumGen2024R">course repository</a> for Human Genome Analysis taught at the University of Massachusetts Amherst by Prof. Jeffrey Blanchard. If you are not using RStudio (Posit) Cloud here are <a href="HumGen_github.html">directions</a> for creating a RStudio project space that will sync with and download files from the course repo.</p>
-<p>Introduction to R and Tidyverse</p>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
 <ul>
-<li>Lab 1 : <a href="HumGen_Lab1_intro.html">Introduction to R and Reproducible Research</a></li>
-<li>Lab 2 : <a href="HumGen_Lab2_ggplot.html">Data Visualization with ggplot</a></li>
-<li>Lab 3 : <a href="HumGen_Lab3_trans.html">Data Transformation with dplyr</a></li>
-<li>Lab 5 : <a href="HumGen_Lab5_covid.html">Data Transformation and Visualization with COVID-19 Reporting Data</a></li>
-<li>Lab 8 : <a href="HumGen_Lab8_joins.html">Data Tidying and Transformation with Table Joins</a></li>
+<li>Data Tidying and pivot longer</li>
+<li>Data Transformation using joins</li>
 </ul>
-<p>Genetic testing, SNPs and GWAS</p>
-<ul>
-<li>Lab 4 : <a href="HumGen_Lab4_23andMe.html">Data Transformation and Visualization with 23andMe data</a></li>
-<li>Lab 6 : <a href="HumGen_Lab6_genealogical_ancestors.html">Organizing DTC Genetic Testing Reports and Finding your Genealogical Ancestors</a></li>
-<li>Lab 7 : <a href="HumGen_Lab7_genetic_ancestors.html">How Many Genetic Ancestors Do I Have?”</a></li>
-<li>Lab 9 : Data Transformation and Visualization with GWASCAT mappings I</li>
-<li>Lab 10 : Data Transformation and Visualization with GWASCAT mappings II</li>
-</ul>
-<p>Gene Expression Analysis</p>
-<ul>
-<li>Lab 11 : RNAseq - Normalization and Data Exploration</li>
-<li>Lab 12: RNAseq - Gene Ontology and Pathway Analysis</li>
-</ul>
-<p>Special labs for graduates students in 678</p>
-<ul>
-<li>Lab g1 : <a href="HumGen_Labg1_covid_map.html">Mapping the COVID-19 Reporting Data</a></li>
-<li>Lab g2 : <a href="HumGen_Labg2_github.html">Connecting a Github Repo Site with a RStudio Project</a></li>
-</ul>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<section id="load-libaries" class="level3">
+<h3 class="anchored" data-anchor-id="load-libaries">Load libaries</h3>
+<div class="cell">
+<details open>
+<summary>R code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="data-tidying" class="level3">
+<h3 class="anchored" data-anchor-id="data-tidying">Data Tidying</h3>
+<p>In <a href="HumGen_Lab5_covid.html">Lab 5 : Data Transformation and Visualization with COVID-19 reporting data</a> we used the <code>pivot_longer</code> function, but did not talk about it in depth. Often spreadsheets are designed for data entry, but this is not the optimum format for data analysis and graphing. Today we will walk through some of the key aspects of <a href="https://r4ds.hadley.nz/data-tidy">Data Tidying</a>. The data sets used in this chapter are loaded with the <code>tidyverse</code> package.</p>
+</section>
+<section id="table-joins" class="level3">
+<h3 class="anchored" data-anchor-id="table-joins">Table Joins</h3>
+<p>A common part of an analysis workflow is combining data from multiples sources. To do this a common element is needed to link the data tables. This is the <code>key</code> that is often described as an important element of relational databases. Often in genome analysis the key is a GenBank or other database ID. Chapter 18 <a href="https://r4ds.hadley.nz/joins">Joins</a> in R for Data Science discusses the key types <code>primary</code>, <code>compound</code>, <code>foreign</code> and <code>surrogate</code>. Then goes over how to use keys in <code>mutating</code> and <code>filtering</code> joins.</p>
+<p>As an additional reference the <a href="https://rstudio-education.github.io/tidyverse-cookbook/transform-tables.html#joins">Tidyverse Cookbook</a> has many practical solutions to problems including different ways to join tables.</p>
+</section>
+</section>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="part-1-data-tidying" class="level3">
+<h3 class="anchored" data-anchor-id="part-1-data-tidying">Part 1 Data Tidying</h3>
+<p>Today you will go through Chapter 5 <a href="https://r4ds.hadley.nz/data-tidy">Data Tidying</a> in R for Data Science. As we did last previously, by putting the examples in our own Quarto Markdown file. You do not need to do the exercises in this chapter.</p>
+</section>
+<section id="part-2-table-joins" class="level3">
+<h3 class="anchored" data-anchor-id="part-2-table-joins">Part 2 Table Joins</h3>
+<p>Go through Sections 18.1 to 18.4 Chapter 18 <a href="https://r4ds.hadley.nz/joins">Joins</a> in R for Data Science putting the examples and exercises in your Quarto file.</p>
+</section>
+<section id="what-to-upload-to-canvas" class="level3">
+<h3 class="anchored" data-anchor-id="what-to-upload-to-canvas">What to upload to Canvas</h3>
+<p>After you <code>Render</code> the qmd file to an html file, export the file to your computer and upload it to Canvas.</p>
+</section>
+</section>
 
 </main>
 <!-- /main column -->

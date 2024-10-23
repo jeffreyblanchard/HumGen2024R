@@ -35,7 +35,7 @@ This code requires the .R scripts in the R_helper folder to run.
 
 ```{r, results='hide', warning=FALSE, message=FALSE}
 # Run the simulation
-k = 7 # number of generations - 1
+k = 3 # number of generations - 1
 source("R_helper/family_tree_plotting_functions.R")
 recoms<-read.table("R_helper/recombination_events.out",as.is=TRUE,head=TRUE)
 source("R_helper/transmission_sims_functions.R")
@@ -90,5 +90,9 @@ The R code is derived code from a blog post by [Graham Coop](https://gcbias.org/
 
 
 
+```{r}
+download.file(url="https://raw.githubusercontent.com/jeffreyblanchard/HumGen2024R/refs/heads/main/R_helper/family_tree_plotting_functions.R", 
+               destfile = "R_helper/test.R")
+```
 
 
