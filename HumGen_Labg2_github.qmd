@@ -1,5 +1,5 @@
 ---
-title: "Connecting a Github repo site with a new RStudio project"
+title: "Lab g2: Connecting a Github repo site with a new RStudio project"
 ---
 
 Much of the material for this lesson was borrowed from or inspired by Matt Jones' [NCEAS Reproducible Research Techniques for Synthesis workshop](https://learning.nceas.ucsb.edu/2020-02-RRCourse/)
