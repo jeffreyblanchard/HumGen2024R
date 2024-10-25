@@ -35,7 +35,7 @@ This code requires the .R scripts in the R_helper folder to run.
 
 ```{r, results='hide', warning=FALSE, message=FALSE}
 # Run the simulation
-k = 3 # number of generations - 1
+k = 7 # number of generations - 1
 source("R_helper/family_tree_plotting_functions.R")
 recoms<-read.table("R_helper/recombination_events.out",as.is=TRUE,head=TRUE)
 source("R_helper/transmission_sims_functions.R")
@@ -78,7 +78,7 @@ my.pie(pie,add=TRUE,sector.colors=my.cols)
 
 ## Excercise 1
 
-Use the provided Rmarkdown HumGen_Lab5_genetic_ancestors_code.Rmd file. Participants working on their own computer will need to also download the files in R_helper on the course github. Make new graphs with 6, 8, 10 and 12 generations. You are going to need to change the legend text size as you add generations. 
+Use the above code (which relies on R files in the R_helper folder) to make graphs with 6, 8, 10 and 12 generations. If you are working on you own computer will need to download the files in R_helper on the course github. 
 
 ## Excercise 2
 
@@ -88,11 +88,5 @@ Discuss the pattern of inheritance you observe. From the perspective of DNA matc
 
 The R code is derived code from a blog post by [Graham Coop](https://gcbias.org/)
 
-
-
-```{r}
-download.file(url="https://raw.githubusercontent.com/jeffreyblanchard/HumGen2024R/refs/heads/main/R_helper/family_tree_plotting_functions.R", 
-               destfile = "R_helper/test.R")
-```
 
 
