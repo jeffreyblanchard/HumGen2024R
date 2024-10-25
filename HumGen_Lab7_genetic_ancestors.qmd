@@ -78,7 +78,7 @@ my.pie(pie,add=TRUE,sector.colors=my.cols)
 
 ## Excercise 1
 
-Use the above code (which relies on R files in the R_helper folder) to make graphs with 6, 8, 10 and 12 generations. If you are working on you own computer will need to download the files in R_helper on the course github. 
+Use the above code (which relies on R files in the R_helper folder) to make graphs with 6, 8, 10 and 12 generations. If you are working on your own computer you will need to download the files in R_helper on the course github. 
 
 ## Excercise 2
 
