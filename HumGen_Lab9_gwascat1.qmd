@@ -422,11 +422,7 @@ How many rsids are in the data set after joining your genetic test with the gwas
 
 ### Exercise 4
 
-What is the difference between DISEASE.TRAIT and DISEASE_MAPPED?
-
-How come positions does not match with start and end?
-  This is true for all 4 kits
-
+What is the difference between DISEASE.TRAIT and MAPPED_TRAIT when you search for a term (e.g. diabetes)?
 
 ### Exercise 5
 
