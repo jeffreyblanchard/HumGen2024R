@@ -18,7 +18,7 @@ Genetic testing, SNPs and GWAS
 * Lab 6 : [Organizing DTC Genetic Testing Reports and Finding your Genealogical Ancestors](HumGen_Lab6_genealogical_ancestors.html)
 * Lab 7 : [How Many Genetic Ancestors Do I Have?"](HumGen_Lab7_genetic_ancestors.html)
 * Lab 9 : [Data Transformation and Visualization with GWASCAT mappings I](HumGen_Lab9_gwascat1.html)
-* Lab 10 : Data Transformation and Visualization with GWASCAT mappings II
+* Lab 10 : [Data Transformation and Visualization with GWASCAT mappings II](HumGen_Lab10_gwascat2.html)
 
 Gene Expression Analysis
 
