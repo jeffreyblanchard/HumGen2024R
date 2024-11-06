@@ -15,7 +15,7 @@ title: "Human Genome Analysis Lab 10 : GWASCAT - Part 2"
 
 ### Libraries for today's lab. 
 
-Note if you are working on your own computer (and not RStudio Cloud) you will need to install Bioconductor before installing `ggbio`. 
+Note if you are working on your own computer (and not RStudio Cloud) you will need to install Bioconductor before installing `ggbio`. See the directions for installing Bioconductor packages in the previous lab.
 
 ```{r, message = FALSE}
 # Load Libraries
