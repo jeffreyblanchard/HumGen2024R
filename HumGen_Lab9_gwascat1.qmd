@@ -1,5 +1,5 @@
 ---
-title: "Human Genome Analysis Lab 5 : Linking DTC SNPs to the NHGRI-EBI Catalog of published genome-wide association studies"
+title: "Human Genome Analysis Lab 9 : Linking DTC SNPs to the NHGRI-EBI Catalog of published genome-wide association studies"
 ---
 
 ## IMPORTANT POINTS FOR TODAY'S LAB FOR UNITY USERS
