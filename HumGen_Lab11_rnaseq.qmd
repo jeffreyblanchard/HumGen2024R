@@ -1,0 +1,137 @@
+---
+title: "Human Genome Analysis Lab 11: Analysis of transcriptome (RNA-Seq) data"
+---
+
+## Learning Objectives
+
+* Understand the basic workflow for RNAseq
+* Data normalization using DESeq
+* Data exploration using PCA, PCO and MDS
+
+## Background
+
+When you are trying to understand a new analysis method, a good strategy is to 
+
+1. Read background material so that you conceptual understand the work flow.
+2. Go through a tutorial and/or R vignette with the tools/packages you will need.
+3. Apply the tutorials/vignettes to your experiment.
+
+Today we will go through steps 1 and 2. For an introduction to RNAseq analysis we will discuss this [Galaxy workflow](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rb-rnaseq/tutorial.html). The steps involving __read mapping__, __transcript quantification__, and __read counting__ are usually done on a Unix computer using the command line or an interface such as Galaxy to a cloud HPC.
+
+## Introduction to a RNA-Seq differential expression workflow
+
+This lab will go through __differential expression analysis in R__ using DESeq2 along with other Bioconductor and core R packages. We will use the package [vignette](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) that the DESeq2 programmers developed to help get people started using the main features of the package. Going through the vignettes and manual are important first steps to learning to use any R package. Here is another option in greater detail - [Bulk RNA-seq tutorial by Marta Pérez Alcántara](https://mperalc.gitlab.io/bulk_RNA-seq_workshop_2021/qc.html) 
+
+To install the packages and data needed to complete this tutorial on your computer (you do not need to do this on Posit Cloud). This assumes your have already installed the core Bioconductor (see Lab 8).
+
+```{r, eval=FALSE}
+# you do not need to do this on Posit
+# Unity users should allocate 12 GB RAM to the JupyterHub server and set time to 4 hrs
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("DESeq2", force = TRUE)
+BiocManager::install("airway", force = TRUE)
+BiocManager::install("tximeta", force = TRUE)
+BiocManager::install("tximport", force = TRUE)
+BiocManager::install("tximportData", force = TRUE)
+BiocManager::install("pasilla")
+BiocManager::install("IHW")
+BiocManager::install("rnaseqGene") for workflow 
+
+```
+
+```{r}
+install.packages('ashr')
+install.packages('vsn')
+```
+
+Unity users may get the following message
+
+```{r}
+# Installation paths not writeable, unable to update packages
+#   path: /modules/apps/miniconda/4.8.3/envs/jupyterhub-stable/lib/R/library
+#   packages:
+#     blob, broom, bslib, callr, caret, cli, cluster, commonmark, cpp11, crayon, crul, curl, data.table, DBI, dbplyr, desc, digest, dplyr, dtplyr, e1071, evaluate, farver,
+#     fontawesome, forcats, foreign, future, future.apply, gargle, generics, ggplot2, glmnet, globals, googlesheets4, gtable, hardhat, haven, hms, htmltools, httpuv, httr,
+#     ipred, isoband, jsonlite, later, lava, lifecycle, lobstr, maps, MASS, Matrix, mgcv, modelr, nlme, nnet, openssl, parallelly, pbdZMQ, pillar, pkgload, progressr, proxy,
+#     purrr, quantmod, randomForest, Rcpp, readr, readxl, recipes, reprex, rlang, rmarkdown, rpart, rstudioapi, rvest, sass, scales, shiny, stringi, survival, sys, testthat,
+#     tibble, tidyr, tidyselect, tidyverse, timeDate, tinytex, uuid, vctrs, viridisLite, vroom, xfun, xts, yaml, zoo
+# Old packages: 'ade4', 'BiocManager', 'brew', 'chron', 'devtools', 'downlit', 'DT', 'duckdb', 'gert', 'gh', 'gitcreds', 'igraph', 'knitr', 'latticeExtra', 'mapdata',
+#   'markdown', 'matrixStats', 'neonUtilities', 'openxlsx', 'processx', 'ps', 'qdapRegex', 'R.methodsS3', 'R.oo', 'R.utils', 'RCurl', 'roxygen2', 'rversions', 'sp',
+ #  'stringdist', 'stringr', 'tm', 'usethis', 'vegan', 'XML', 'zip'
+# Update all/some/none? [a/s/n]: 
+```
+
+select a
+
+### The rnaseq workflow
+
+The data used in the [rnaseq workflow](https://bioconductor.org/packages/release/workflows/html/rnaseqGene.html) (and some of the vignette) is an RNA-Seq experiment of airway smooth muscle cells treated with dexamethasone, a synthetic glucocorticoid steroid with anti-inflammatory effects. Glucocorticoids are used, for example, in asthma patients to prevent or reduce inflammation of the airways. In the experiment, four primary human airway smooth muscle cell lines were treated with 1 micromolar dexamethasone for 18 hours. For each of the four cell lines, we have a treated and an untreated sample. The reference for the experiment is:
+
+Himes BE, Jiang X, Wagner P, Hu R, Wang Q, Klanderman B, Whitaker RM, Duan Q, Lasky-Su J, Nikolos C, Jester W, Johnson M, Panettieri R Jr, Tantisira KG, Weiss ST, Lu Q. "RNA-Seq Transcriptome Profiling Identifies CRISPLD2 as a Glucocorticoid Responsive Gene that Modulates Cytokine Function in Airway Smooth Muscle Cells." PLoS One. 2014 Jun 13;9(6):e99625. PMID: 24926665. GEO: GSE52778.. 
+
+## Exercises
+
+### Exercise 1
+
+Download (or upload to Posit Cloud) the R script associated with the [rnaseq workflow](https://bioconductor.org/packages/release/workflows/html/rnaseqGene.html) (and some of the vignette). I have installed the relevant libraries in Posit Cloud. Note that if you are following the html page skip the example code in section `2.2 Quantifying with Salmon`
+
+__IMPORTANT__
+When running the following the first time
+```{r, eval=FALSE}
+library("tximeta")
+se <- tximeta(coldata)
+```
+
+```{r}
+# tximeta needs a BiocFileCache directory to access and save TxDb objects.
+# Do you wish to use the default directory: '/cloud/home/r555412/.cache/R/BiocFileCache'?
+# If not, a temporary directory that is specific to this R session will be used.
+# You can always change this directory later by running: setTximetaBFC()
+# Or enter [0] to exit and set this directory manually now.
+# This location can also be set by environmental variable TXIMETA_HUB_CACHE. 
+
+# 1: Yes (use default)
+# 2: No (use temp)
+```
+
+Select 1 (Yes)
+
+Then then a message similar to this may appear
+```{r}
+# /cloud/home/r555412/.cache/R/BiocFileCache
+#   does not exist, create directory? (yes/no): 
+```
+
+Select yes
+
+Make a qmd file with the working code (not chunks with eval = false). Use this file as a basis for answering the below exercises. Put the exercises at the end of the file. 
+
+
+### Exercise 2
+
+In section `4.2 The variance stabilizing transformation and the rlog` section a data frame (df) is created by binding together select columns from data objects `dds`, `vsd` and `rld` that have different transformations of the data. 
+
+Near the end of this section a panel of lots is produced for the 3 transformations using SRR1039508 and SRR1039509. This is specified in the line `as_data_frame(log2(counts(dds, normalized=TRUE)[, 1:2]+1))`  where 1:2 correspond to SRR1039508 and SRR1039509. Show a comparison of the dex treated and untreated data from the N061011 cell lines
+
+### Exercise 3
+
+In the section `4.4 PCA plot` change the PCA plot to color the points by cell type and the shape by whether they were treated with dexamethasone. 
+
+### Exercise 4
+
+In section `5.4 Multiple testing` DESeq2 uses the Benjamini-Hochberg (BH) adjustment.If we increase the bar for significance testing to 0.05. How many such genes are there? 
+
+### Exercise 5
+
+In that same section at the bottom the genes are subsetted to show those with the strongest down-regulation. Using the BH p=0.05 from above show the genes the strongest up-regulation.
+
+### Exercise 6
+
+In the `6.3 Gene clustering` section. 
+
+A. Modify the graph to show a heat plot from the 50 genes with the highest variance across samples. Are the same hierarchical cluster patterns retained as in the graph with the top 20 genes? 
+
+B. Show the results using the rlog transformation which is in `rld`. What are the differences in patterns between the 2 types of transformations?
+

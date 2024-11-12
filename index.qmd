@@ -22,8 +22,7 @@ Genetic testing, SNPs and GWAS
 
 Gene Expression Analysis
 
-* Lab 11 : RNAseq - Normalization and Data Exploration
-* Lab 12: RNAseq - Gene Ontology and Pathway Analysis
+* Lab 11 : [RNAseq - Normalization and Data Exploration](HumGen_Lab11_rnaseq.html)
 
 Special labs for graduates students in 678
 

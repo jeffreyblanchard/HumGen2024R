@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Human Genome Analysis Spring 2024</title>
+<title>Human Genome Analysis Lab 11: Analysis of transcriptome (RNA-Seq) data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,6 +18,40 @@ ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+}
+pre.numberSource { margin-left: 3em; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -2985,13 +3019,33 @@ vertical-align: -.125em;
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#introduction-to-a-rna-seq-differential-expression-workflow" id="toc-introduction-to-a-rna-seq-differential-expression-workflow" class="nav-link" data-scroll-target="#introduction-to-a-rna-seq-differential-expression-workflow">Introduction to a RNA-Seq differential expression workflow</a>
+  <ul class="collapse">
+  <li><a href="#the-rnaseq-workflow" id="toc-the-rnaseq-workflow" class="nav-link" data-scroll-target="#the-rnaseq-workflow">The rnaseq workflow</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
+  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a></li>
+  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
+  <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
+  <li><a href="#exercise-6" id="toc-exercise-6" class="nav-link" data-scroll-target="#exercise-6">Exercise 6</a></li>
+  </ul></li>
+  </ul>
+</nav>
 </div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Human Genome Analysis Spring 2024</h1>
+<h1 class="title">Human Genome Analysis Lab 11: Analysis of transcriptome (RNA-Seq) data</h1>
 </div>
 
 
@@ -3006,32 +3060,141 @@ vertical-align: -.125em;
 
 </header>
 
-<p>This is a rendering of hmtl files from the <a href="https://github.com/jeffreyblanchard/HumGen2024R">course repository</a> for Human Genome Analysis taught at the University of Massachusetts Amherst by Prof. Jeffrey Blanchard. If you are not using RStudio (Posit) Cloud here are <a href="HumGen_github.html">directions</a> for creating a RStudio project space that will sync with and download files from the course repo.</p>
-<p>Introduction to R and Tidyverse</p>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <ul>
-<li>Lab 1 : <a href="HumGen_Lab1_intro.html">Introduction to R and Reproducible Research</a></li>
-<li>Lab 2 : <a href="HumGen_Lab2_ggplot.html">Data Visualization with ggplot</a></li>
-<li>Lab 3 : <a href="HumGen_Lab3_trans.html">Data Transformation with dplyr</a></li>
-<li>Lab 5 : <a href="HumGen_Lab5_covid.html">Data Transformation and Visualization with COVID-19 Reporting Data</a></li>
-<li>Lab 8 : <a href="HumGen_Lab8_joins.html">Data Tidying and Transformation with Table Joins</a></li>
+<li>Understand the basic workflow for RNAseq</li>
+<li>Data normalization using DESeq</li>
+<li>Data exploration using PCA, PCO and MDS</li>
 </ul>
-<p>Genetic testing, SNPs and GWAS</p>
-<ul>
-<li>Lab 4 : <a href="HumGen_Lab4_23andMe.html">Data Transformation and Visualization with 23andMe data</a></li>
-<li>Lab 6 : <a href="HumGen_Lab6_genealogical_ancestors.html">Organizing DTC Genetic Testing Reports and Finding your Genealogical Ancestors</a></li>
-<li>Lab 7 : <a href="HumGen_Lab7_genetic_ancestors.html">How Many Genetic Ancestors Do I Have?”</a></li>
-<li>Lab 9 : <a href="HumGen_Lab9_gwascat1.html">Data Transformation and Visualization with GWASCAT mappings I</a></li>
-<li>Lab 10 : <a href="HumGen_Lab10_gwascat2.html">Data Transformation and Visualization with GWASCAT mappings II</a></li>
-</ul>
-<p>Gene Expression Analysis</p>
-<ul>
-<li>Lab 11 : <a href="HumGen_Lab11_rnaseq.html">RNAseq - Normalization and Data Exploration</a></li>
-</ul>
-<p>Special labs for graduates students in 678</p>
-<ul>
-<li>Lab g1 : <a href="HumGen_Labg1_covid_map.html">Mapping the COVID-19 Reporting Data</a></li>
-<li>Lab g2 : <a href="HumGen_Labg2_github.html">Connecting a Github Repo Site with a RStudio Project</a></li>
-</ul>
+</section>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>When you are trying to understand a new analysis method, a good strategy is to</p>
+<ol type="1">
+<li>Read background material so that you conceptual understand the work flow.</li>
+<li>Go through a tutorial and/or R vignette with the tools/packages you will need.</li>
+<li>Apply the tutorials/vignettes to your experiment.</li>
+</ol>
+<p>Today we will go through steps 1 and 2. For an introduction to RNAseq analysis we will discuss this <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rb-rnaseq/tutorial.html">Galaxy workflow</a>. The steps involving <strong>read mapping</strong>, <strong>transcript quantification</strong>, and <strong>read counting</strong> are usually done on a Unix computer using the command line or an interface such as Galaxy to a cloud HPC.</p>
+</section>
+<section id="introduction-to-a-rna-seq-differential-expression-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-a-rna-seq-differential-expression-workflow">Introduction to a RNA-Seq differential expression workflow</h2>
+<p>This lab will go through <strong>differential expression analysis in R</strong> using DESeq2 along with other Bioconductor and core R packages. We will use the package <a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html">vignette</a> that the DESeq2 programmers developed to help get people started using the main features of the package. Going through the vignettes and manual are important first steps to learning to use any R package. Here is another option in greater detail - <a href="https://mperalc.gitlab.io/bulk_RNA-seq_workshop_2021/qc.html">Bulk RNA-seq tutorial by Marta Pérez Alcántara</a></p>
+<p>To install the packages and data needed to complete this tutorial on your computer (you do not need to do this on Posit Cloud). This assumes your have already installed the core Bioconductor (see Lab 8).</p>
+<div class="cell">
+<details open>
+<summary>R code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you do not need to do this on Posit</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Unity users should allocate 12 GB RAM to the JupyterHub server and set time to 4 hrs</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;DESeq2&quot;</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;airway&quot;</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;tximeta&quot;</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;tximport&quot;</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;tximportData&quot;</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;pasilla&quot;</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;IHW&quot;</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;rnaseqGene&quot;</span>) <span class="cf">for</span> workflow </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open>
+<summary>R code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;ashr&#39;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;vsn&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Unity users may get the following message</p>
+<div class="cell">
+<details open>
+<summary>R code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Installation paths not writeable, unable to update packages</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   path: /modules/apps/miniconda/4.8.3/envs/jupyterhub-stable/lib/R/library</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   packages:</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     blob, broom, bslib, callr, caret, cli, cluster, commonmark, cpp11, crayon, crul, curl, data.table, DBI, dbplyr, desc, digest, dplyr, dtplyr, e1071, evaluate, farver,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     fontawesome, forcats, foreign, future, future.apply, gargle, generics, ggplot2, glmnet, globals, googlesheets4, gtable, hardhat, haven, hms, htmltools, httpuv, httr,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     ipred, isoband, jsonlite, later, lava, lifecycle, lobstr, maps, MASS, Matrix, mgcv, modelr, nlme, nnet, openssl, parallelly, pbdZMQ, pillar, pkgload, progressr, proxy,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#     purrr, quantmod, randomForest, Rcpp, readr, readxl, recipes, reprex, rlang, rmarkdown, rpart, rstudioapi, rvest, sass, scales, shiny, stringi, survival, sys, testthat,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     tibble, tidyr, tidyselect, tidyverse, timeDate, tinytex, uuid, vctrs, viridisLite, vroom, xfun, xts, yaml, zoo</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Old packages: &#39;ade4&#39;, &#39;BiocManager&#39;, &#39;brew&#39;, &#39;chron&#39;, &#39;devtools&#39;, &#39;downlit&#39;, &#39;DT&#39;, &#39;duckdb&#39;, &#39;gert&#39;, &#39;gh&#39;, &#39;gitcreds&#39;, &#39;igraph&#39;, &#39;knitr&#39;, &#39;latticeExtra&#39;, &#39;mapdata&#39;,</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   &#39;markdown&#39;, &#39;matrixStats&#39;, &#39;neonUtilities&#39;, &#39;openxlsx&#39;, &#39;processx&#39;, &#39;ps&#39;, &#39;qdapRegex&#39;, &#39;R.methodsS3&#39;, &#39;R.oo&#39;, &#39;R.utils&#39;, &#39;RCurl&#39;, &#39;roxygen2&#39;, &#39;rversions&#39;, &#39;sp&#39;,</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a> <span class="co">#  &#39;stringdist&#39;, &#39;stringr&#39;, &#39;tm&#39;, &#39;usethis&#39;, &#39;vegan&#39;, &#39;XML&#39;, &#39;zip&#39;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Update all/some/none? [a/s/n]: </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>select a</p>
+<section id="the-rnaseq-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="the-rnaseq-workflow">The rnaseq workflow</h3>
+<p>The data used in the <a href="https://bioconductor.org/packages/release/workflows/html/rnaseqGene.html">rnaseq workflow</a> (and some of the vignette) is an RNA-Seq experiment of airway smooth muscle cells treated with dexamethasone, a synthetic glucocorticoid steroid with anti-inflammatory effects. Glucocorticoids are used, for example, in asthma patients to prevent or reduce inflammation of the airways. In the experiment, four primary human airway smooth muscle cell lines were treated with 1 micromolar dexamethasone for 18 hours. For each of the four cell lines, we have a treated and an untreated sample. The reference for the experiment is:</p>
+<p>Himes BE, Jiang X, Wagner P, Hu R, Wang Q, Klanderman B, Whitaker RM, Duan Q, Lasky-Su J, Nikolos C, Jester W, Johnson M, Panettieri R Jr, Tantisira KG, Weiss ST, Lu Q. “RNA-Seq Transcriptome Profiling Identifies CRISPLD2 as a Glucocorticoid Responsive Gene that Modulates Cytokine Function in Airway Smooth Muscle Cells.” PLoS One. 2014 Jun 13;9(6):e99625. PMID: 24926665. GEO: GSE52778..</p>
+</section>
+</section>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="exercise-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
+<p>Download (or upload to Posit Cloud) the R script associated with the <a href="https://bioconductor.org/packages/release/workflows/html/rnaseqGene.html">rnaseq workflow</a> (and some of the vignette). I have installed the relevant libraries in Posit Cloud. Note that if you are following the html page skip the example code in section <code>2.2 Quantifying with Salmon</code></p>
+<p><strong>IMPORTANT</strong> When running the following the first time</p>
+<div class="cell">
+<details open>
+<summary>R code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;tximeta&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">tximeta</span>(coldata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open>
+<summary>R code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tximeta needs a BiocFileCache directory to access and save TxDb objects.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Do you wish to use the default directory: &#39;/cloud/home/r555412/.cache/R/BiocFileCache&#39;?</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If not, a temporary directory that is specific to this R session will be used.</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># You can always change this directory later by running: setTximetaBFC()</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Or enter [0] to exit and set this directory manually now.</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># This location can also be set by environmental variable TXIMETA_HUB_CACHE. </span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1: Yes (use default)</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2: No (use temp)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Select 1 (Yes)</p>
+<p>Then then a message similar to this may appear</p>
+<div class="cell">
+<details open>
+<summary>R code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># /cloud/home/r555412/.cache/R/BiocFileCache</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   does not exist, create directory? (yes/no): </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Select yes</p>
+<p>Make a qmd file with the working code (not chunks with eval = false). Use this file as a basis for answering the below exercises. Put the exercises at the end of the file.</p>
+</section>
+<section id="exercise-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2">Exercise 2</h3>
+<p>In section <code>4.2 The variance stabilizing transformation and the rlog</code> section a data frame (df) is created by binding together select columns from data objects <code>dds</code>, <code>vsd</code> and <code>rld</code> that have different transformations of the data.</p>
+<p>Near the end of this section a panel of lots is produced for the 3 transformations using SRR1039508 and SRR1039509. This is specified in the line <code>as_data_frame(log2(counts(dds, normalized=TRUE)[, 1:2]+1))</code> where 1:2 correspond to SRR1039508 and SRR1039509. Show a comparison of the dex treated and untreated data from the N061011 cell lines</p>
+</section>
+<section id="exercise-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-3">Exercise 3</h3>
+<p>In the section <code>4.4 PCA plot</code> change the PCA plot to color the points by cell type and the shape by whether they were treated with dexamethasone.</p>
+</section>
+<section id="exercise-4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4">Exercise 4</h3>
+<p>In section <code>5.4 Multiple testing</code> DESeq2 uses the Benjamini-Hochberg (BH) adjustment.If we increase the bar for significance testing to 0.05. How many such genes are there?</p>
+</section>
+<section id="exercise-5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5">Exercise 5</h3>
+<p>In that same section at the bottom the genes are subsetted to show those with the strongest down-regulation. Using the BH p=0.05 from above show the genes the strongest up-regulation.</p>
+</section>
+<section id="exercise-6" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-6">Exercise 6</h3>
+<p>In the <code>6.3 Gene clustering</code> section.</p>
+<p>A. Modify the graph to show a heat plot from the 50 genes with the highest variance across samples. Are the same hierarchical cluster patterns retained as in the graph with the top 20 genes?</p>
+<p>B. Show the results using the rlog transformation which is in <code>rld</code>. What are the differences in patterns between the 2 types of transformations?</p>
+</section>
+</section>
 
 </main>
 <!-- /main column -->
