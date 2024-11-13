@@ -20,12 +20,6 @@ Note if you are working on your own computer (and not RStudio Cloud) you will ne
 ```{r, message = FALSE}
 # Load Libraries
 library(tidyverse)
-library(DT)
-library(gwascat) # bioconductor package
-library(ggtext)
-library(ggbio) # bioconductor package
-library(GenomicRanges) # bioconductor package
-data("CRC", package = "biovizBase")
 ```
 
 ### First load 23andMe or Ancestry data
@@ -44,7 +38,8 @@ mySNPs <- read_tsv("data/23andMe_raw.tsv", comment = '#', col_names = FALSE) |>
 
 
 #### Code for AncestryDNA
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 # Load Ancestry DNA file 
 mySNPs <- read_tsv("data/AncestryDNA.txt", comment = '#',
 col_types =
@@ -56,6 +51,38 @@ col_types =
   mutate(genotype= paste(allele1, allele2, sep = '')) |>
   select(-c(allele1, allele2)) |> 
   mutate(across(genotype, as_factor))
+```
+
+
+#### MyHeritageDNA
+
+```{r}
+#| eval: false
+mySNPs <- read_csv("data/MyHeritage_raw.csv", comment = '#') |>
+  # rename column labels to be consistent with 23andME and AncestryDNA
+  rename(rsid = RSID) |> 
+  rename(chromosome = CHROMOSOME) |> 
+  rename(position = POSITION) |> 
+  rename(genotype = RESULT) |> 
+  # change to factors
+  mutate(chromosome = as.factor(chromosome)) |> 
+  mutate(genotype = as.factor(genotype))
+```
+
+#### FamilyTreeDNA
+
+```{r}
+#| eval: false
+mySNPs <- read_csv("data/FamilyTreeDNA_raw.csv", comment = '#') |>
+  # rename column labels to be consistent with 23andME and AncestryDNA
+  rename(rsid = RSID) |> 
+  rename(chromosome = CHROMOSOME) |> 
+  rename(position = POSITION) |> 
+  rename(genotype = RESULT) |> 
+  # change to factors
+  mutate(chromosome = as.factor(chromosome)) |> 
+  mutate(genotype = as.factor(genotype)) 
+
 ```
 
 As we have seen this file holds just the rsid, position, chromosome and genotype
@@ -70,12 +97,12 @@ These files are available in your data folder on Posit Cloud, in the file tab in
 
 ```{r}
 # Oct 2024 gwas table
-updated_gwas_data <- read_tsv("data/updated_gwas_data.tsv") |> 
-    mutate(CHR_POS = as.numeric(CHR_POS)) 
+# updated_gwas_data <- read_tsv("data/updated_gwas_data.tsv") |> 
+   # mutate(CHR_POS = as.numeric(CHR_POS)) 
 
 # Oct 2023 gwas table
-# updated_gwas_data <- read_tsv("data/gwas_data_2023.tsv") |> 
-    # mutate(CHR_POS = as.numeric(CHR_POS)) 
+updated_gwas_data <- read_tsv("data/gwas_data_2023.tsv") |> 
+    mutate(CHR_POS = as.numeric(CHR_POS)) 
 ```
 
 
@@ -96,6 +123,16 @@ mySNPs_gwas_table$have_risk_allele_count <- if_else(mySNPs_gwas_table$my_allele_
 
 
 ## Other analyses that can be done with your SNP data
+
+```{r, message = FALSE}
+# Load Libraries
+library(DT)
+library(gwascat) # bioconductor package
+library(ggtext)
+library(ggbio) # bioconductor package
+library(GenomicRanges) # bioconductor package
+data("CRC", package = "biovizBase")
+```
 
 ### Example with genome context
 
@@ -215,8 +252,6 @@ ggbio is a Bioconductor package building on top of ggplot2. It provides a genomi
 Note: This graph is not currently working with the 2024 gwas data set.  Thus, skip unless you are interested in doing this with the 2023 gwascat file in our data folder.
 
 ```{r, fig.height = 7}
-#| eval: false
-
 mySNPs_gwas_table_1_22 <- mySNPs_gwas_table |> 
   filter(seqnames %in% 1:22 & have_risk_allele_count > 1) |> 
   distinct(rsid, .keep_all = TRUE)
@@ -240,7 +275,7 @@ mySNPs_gwas_plot_disease <- GRanges(seqnames = mySNPs_gwas_table_disease$seqname
 
 ggbio()  +
   circle(mySNPs_gwas_plot_disease, geom = "rect", color = "maroon4") +
-#  circle(mySNPs_gwas_plot_1_22, geom = "rect", color = "steelblue") +
+  circle(mySNPs_gwas_plot_1_22, geom = "rect", color = "steelblue") +
   circle(hg19sub, geom = "scale", size = 2) +
   circle(hg19sub, geom = "text", aes(label = seqnames), vjust = -2, size = 3)
 ```
