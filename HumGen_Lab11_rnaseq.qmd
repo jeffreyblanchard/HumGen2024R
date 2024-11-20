@@ -37,7 +37,7 @@ BiocManager::install("tximport", force = TRUE)
 BiocManager::install("tximportData", force = TRUE)
 BiocManager::install("pasilla")
 BiocManager::install("IHW")
-BiocManager::install("rnaseqGene") for workflow 
+BiocManager::install("rnaseqGene") # for workflow 
 
 ```
 
