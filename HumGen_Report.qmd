@@ -4,7 +4,7 @@ title: "Genetic Testing Report and Presentation"
 
 ## Genetic Testing Report
 
-This class has two related final projects, a Genetic Testing Report and Poster Presentation. The content of the reports will be similar, but the audience will be different. For the Genetic Testing Report, it should be targeted towards an audience with little background in genetic testing. You could envision this as the report you would produce for the person being tested and/or to communicate your results to family members and friends. The report is due Friday Dec 15th. There is an assignment on posit cloud. Please complete your report using a R markdown file and submit the knitted html file as for lab reports. The report should have the following components.
+This class has two related final projects, a Genetic Testing Report and Poster Presentation. The content of the reports will be similar, but the audience will be different. For the Genetic Testing Report, it should be targeted towards an audience with little background in genetic testing. You could envision this as the report you would produce for the person being tested and/or to communicate your results to family members and friends. The report is due Wednesday Dec 11th. There is an assignment on posit cloud. Please complete your report using a R markdown file and submit the knitted html file as for lab reports. The report should have the following components.
 
 ### 1. Ethics and security considerations related to personal genetic testing (about 1 page)
 
@@ -44,7 +44,7 @@ What are your recommendations or plans for next steps based on your results. Sho
 
 ## Presentation
 
-The Presentation is for your peers in this class and thus can focus more on the results than the methods. During the last class session on Mon Dec 4th we will break (in Zoom) into groups. We will use the Zoom share screen tool for the presentations. The presentation will consist of no more than 10 slides presented within 10 minutes with time for questions.
+The Presentation is for your peers in this class and thus can focus more on the results than the methods. During the last class session on Wednesday Dec 4th we will break (in Zoom) into groups. We will use the Zoom share screen tool for the presentations. The presentation will consist of no more than 10 slides presented within 8 minutes with 2 minute for questions.
 
 ### Guidelines fo Presentations
 
