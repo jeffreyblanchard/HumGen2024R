@@ -28,3 +28,7 @@ Special labs for graduates students in 678
 
 * Lab g1 : [Mapping the COVID-19 Reporting Data](HumGen_Labg1_covid_map.html)
 * Lab g2 : [Connecting a Github Repo Site with a RStudio Project](HumGen_Labg2_github.html)
+
+Report
+
+* [Human Genetic Testing Report](HumGen_Report.html)
