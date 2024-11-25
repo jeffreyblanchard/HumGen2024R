@@ -30,7 +30,7 @@ The second concept is [Repute](https://www.snpedia.com/index.php/Repute). This i
 
 ## Exercise
 
-Here is are two example reports [Person 1 report](data/promethease/person1/promethease.html) and [Person 2 report](data/promethease/person2/promethease.html).
+Here is are two example reports [Person 1 report](images/promethease/person1/promethease.html) and [Person 2 report](images/promethease/person2/promethease.html).
 
 Compare the Promethease report with your 23andMe or Ancestry reports. Include a discussion which results they present and the concepts of Magnitude and Repute. Do you agree with using these concepts in a genetic testing report?  How might you change or create a different system to highlight particular results. Discuss not only medical related SNPs, but some of the popular ones listed in 23andMe and on the SNPedia page.There is no code to upload for this lab, but write the report in rMarkdown and knit to produce the html file to upload onto Moodle.
 
